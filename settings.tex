@@ -1,0 +1,42 @@
+\usepackage{mathtools, stackengine}
+\numberwithin{equation}{section}
+\usepackage{esint}
+%\usepackage{undertilde}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\usepackage{tikz}
+\usetikzlibrary{arrows} 
+\usetikzlibrary{calc,angles,quotes}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{longtable}
+\usepackage{color,soul}
+\usepackage{bm}
+\usepackage{setspace}
+\newcommand{\ba}{\backslash}
+\doublespacing
+\usepackage{afterpage}
+\usepackage{geometry} %may be sus
+\usepackage[framed,numbered]{matlab-prettifier}
+% turn "backspace" character (ASCII 8) into a tab (9) to avoid Matlab warning backspace
+\catcode8=9
+\lstset{
+  style             = Matlab-editor,
+  basicstyle        = {\ttfamily\tiny},
+  mlshowsectionrules = true,
+  upquote           = true
+}
+
+\newcommand{\spacer}{\vspace{6mm} \noindent}
+
+\usepackage{enumitem}
+
+% BIB stuff
+
+%\usepackage{biblatex}
+%\addbibresource{Matt_Bib.bib}
+
+\usepackage{hyperref}
