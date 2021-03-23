@@ -1,0 +1,2 @@
+http://www.crsp.org/products/documentation/stock-data-file-layouts
+http://www.crsp.org/products/documentation/stock-index-data-file-layouts-and-index-data-file-layouts
