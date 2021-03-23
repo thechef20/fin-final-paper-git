@@ -1,0 +1,7 @@
+*.csv
+*.dta
+*.xls
+*.xlsx
+*.mat
+*.tsv
+*.DS_Store
