@@ -89,15 +89,32 @@ drop if missing(rf)
 drop if missing(kypermno)
 egen collapse_id = group(mmonth cal_year kypermno)
 * do we actually want sum for HML???
-collapse(mean)  kypermno  (sum) ret returns  rf hml smb rmw (mean) tcap cal_year mmonth , by(collapse_id)
+collapse(mean)  kypermno  (sum) ret returns  rf hml smb rmw cma (mean) tcap cal_year mmonth , by(collapse_id)
 sort kypermno cal_year mmonth
 drop collapse_id
 
 **Merge market data 
 merge m:1  cal_year mmonth using market_1000080.dta
+drop if missing(rf)
 drop _merge
 
+*creating rf adjusted colums
+gen market_minus_rf = maret - rf
+gen ESG_minus_rf = returns - rf
+gen expected_return_stock = ret - rf
+
+drop maret
+drop returns
+drop ret
+*drop rf
+order kypermno expected_return_stock ESG_minus_rf market_minus_rf hml smb rmw cma tcap cal_year mmonth rf
+sort kypermno cal_year mmonth
 ** Getting ready to put into matlab 
+
 egen time_match = group(mmonth cal_year)
 export delimited using "ESG_and_five_factors.csv", replace
  
+ 
+ *this will be helpful for consitent order btw sheets
+*order id gender income 
+
