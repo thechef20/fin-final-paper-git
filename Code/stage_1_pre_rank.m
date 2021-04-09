@@ -1,5 +1,5 @@
-% Matt Mike & Ben
-% Last Edited 2/24/21
+% Matt 
+% Last Edited 4/9/21
 %% Setup Section
 % setting dataset for part 1 (please don't run unless you have
 % data_with_with_market_attached.csv)
