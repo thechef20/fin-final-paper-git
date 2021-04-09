@@ -14,6 +14,8 @@ this paper will be broken up into five  sections. \textit{Section \ref{Literatur
 \section{Data}
 \label{Data}
 The data used for this paper was soured three databases. The daily performance of the individual stock prices was collected from CRSP's primarily daily stock prices. Data on the ESG portfolio was extracted from compustat as the daily average returns for MSCI World ESG Focus Index. Finally, daily Fama French factors for SMB, CMA,HML, and RMW were sourced from the Kenneth R. French - Data Library.  The time period for the data for the paper is between June 2011 and December 2020. The segment of stock data is determined by the length of available performance for the MSCI World ESG Focus Index as this index was initiated in June 2011. Daily values were summed and collapsed to created monthly values for factor and individual security performance. 
+
+we looking 830,891 observation for  12,194 unique stocks which gives an average of 68months of data 
 \section{Methodology}
 \label{Methodology}
 As dicussed in the literature review there are numerous different models for assessing asset pricing and abnormal returns. In this paper I will be using an extension on on Fama French's 2015 paper ``A five factor asset pricing model".
@@ -38,9 +40,5 @@ In equation \eqref{six_factor_basic_reg} $HML_{t}$ is the difference between the
 \section{Conclusion}
 \label{Conclusion}
 \section{Code}
-\textbf{Data Cleaning and setting up for Pre-Ranking}
-
-\lstinputlisting{Code/stage_1_pre_rank.m}
-\lstinputlisting[language=Stata]{Code/code_for_returns.do}
-
+\input{Paper/Code_files}
 \end{document}
