@@ -24,7 +24,7 @@ mmonth = A{:,11};
 
 upper_counter =0;
 lower_counter = 0;
-pre_rank_matrix = nan(length(stock_symbols_refrences),13); %if I wanted individual beta we would extend this to 7
+pre_rank_matrix = nan(length(stock_symbols_refrences),12); %if I wanted individual beta we would extend this to 7
 for i =1:length(stock_symbols_refrences)-1
     current_stock = stock_symbols_refrences(i);
     next_stock =stock_symbols_refrences(i+1);
@@ -35,23 +35,20 @@ for i =1:length(stock_symbols_refrences)-1
             if upper_counter > n_upper
                 upper_counter = n_upper;
             end
-            %indexing seems sus!! 4/9/21
             market = [market_reutrns(1+i-n_lower-upper_counter:i+1) market_reutrns(i-n_lower-upper_counter:i)];
             ESG_retun_data = [ESG_returns(1+i-n_lower-upper_counter:i+1) ESG_returns(i-n_lower-upper_counter:i)];
             individual = [individual_stock_return(1+i-n_lower-upper_counter:i+1)]; 
             beta_market = regress(individual , market)';
-            beta_ESG = regress(individual , ESG_retun_data)';
-            sum_o_beta_market = sum(beta_market);
-            sum_o_beta_ESG = sum(beta_ESG);
-            pre_rank_matrix(i,:)= [r_and_m_name sum_o_beta_market sum_o_beta_ESG];
+            sum_o_beta = sum(beta_market);
+            pre_rank_matrix(i,:)= [r_and_m_name sum_o_beta];
             upper_counter = upper_counter + 1; 
         else
-            pre_rank_matrix(i,:)= [r_and_m_name NaN NaN];
+            pre_rank_matrix(i,:)= [r_and_m_name NaN];
         end
         
         lower_counter = lower_counter+1;
     else
-        pre_rank_matrix(i,:)= [r_and_m_name NaN NaN];
+        pre_rank_matrix(i,:)= [r_and_m_name NaN];
         upper_counter =0;
         lower_counter = 0;
     end
