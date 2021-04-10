@@ -36,9 +36,10 @@ sort kypermno cal_year mmonth
 egen firm_time_id = group(mpportnum cal_year mmonth)
 
 * xtile but faster!
-fasterxtile beta_decile = (pre_ranked_beta), by(firm_time_id) nq(10)
+*fasterxtile beta_decile = (pre_ranked_beta), by(firm_time_id) nq(10)
+astile beta_decile=pre_ranked_esg, nq(10) by(firm_time_id)
 *this sort gives me fear
-sort kypermno annual mmonth beta_decile mpportnum
+sort kypermno cal_year mmonth pre_ranked_esg mpportnum
 export delimited using end_of_step_3_stata.csv, replace
 
 save merged_portfolio_and_preranked_beta_data.dta, replace
