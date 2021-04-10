@@ -9,6 +9,7 @@ smb = A{:,6};
 rmw = A{:,7};
 cma = A{:,8};
 esg_factor = A{:,9};
+modate = A{:,9};
 time_index = A{:,10};
 
 %% the show!!
@@ -42,8 +43,8 @@ for i = 1:length(porflio_number)-1
         smb_i = smb(i-counter:i);
         rmw_i= rmw(i-counter:i);
         cma_i = cma(i-counter:i);
-        esg_factor_i = esg_factor(i-counter:i);
-        factors = [hml_i smb_i rmw_i cma_i esg_factor_i];
+        esg_factor_i = esg_factor(i-counter:end);
+        factors = [hml_i smb_i rmw_i cma_i ];
         reg_1 = regress(returns_i, factors);
         out_for_reg_1 = [out_for_reg_1 reg_1];
         counter = 0;
