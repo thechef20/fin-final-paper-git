@@ -81,8 +81,7 @@ drop if missing(returns)
 drop if missing(rf)
 drop if missing(kypermno)
 egen collapse_id = group(mmonth cal_year kypermno)
-* do we actually want sum for HML???
-collapse(mean)  kypermno  (sum) ret returns  rf hml smb rmw cma (mean) tcap cal_year mmonth , by(collapse_id)
+collapse(mean)  kypermno  (sum) retx returns  rf hml smb rmw cma (mean) tcap cal_year mmonth , by(collapse_id)
 sort kypermno cal_year mmonth
 drop collapse_id
 
@@ -94,11 +93,11 @@ drop _merge
 *** creating rf adjusted colums ***
 gen market_minus_rf = maret - rf
 gen ESG_minus_rf = returns - rf
-gen expected_return_stock = ret - rf
+gen expected_return_stock = retx - rf
 
 drop maret
 drop returns
-drop ret
+drop retx
 drop rf
 order kypermno expected_return_stock ESG_minus_rf market_minus_rf hml smb rmw cma tcap cal_year mmonth
 sort kypermno cal_year mmonth

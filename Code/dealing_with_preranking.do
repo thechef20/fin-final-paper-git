@@ -4,7 +4,9 @@ cls
 *Last Edited: 4/9/21
 
 * Setting up workspace
-*ssc install gtools
+*ssc install astile
+*help astile
+
 cd /Users/matt/Final_Paper_Git/Code/data
 
 import delimited using pre_rank_table.csv,clear
@@ -35,10 +37,18 @@ drop mpindno
 sort kypermno cal_year mmonth
 egen firm_time_id = group(mpportnum cal_year mmonth)
 
-* xtile but faster!
-*fasterxtile beta_decile = (pre_ranked_beta), by(firm_time_id) nq(10)
+
+*** NOTE: We are using the ESG as the beta decile ***
+* xtile but fastest!
+*we are cleaning some of the extremes from either end of the beta range
+astile beta_decile_toss=pre_ranked_esg, nq(25) by(firm_time_id)
+drop if beta_decile_toss == 1
+drop if beta_decile_toss == 25 
+drop if tcap < 10000
+drop beta_decile_toss
+sum pre_ranked_esg
+
 astile beta_decile=pre_ranked_esg, nq(10) by(firm_time_id)
-*this sort gives me fear
 sort kypermno cal_year mmonth pre_ranked_esg mpportnum
 export delimited using end_of_step_3_stata.csv, replace
 
@@ -47,5 +57,6 @@ save merged_portfolio_and_preranked_beta_data.dta, replace
 *new sort that will be used to merge the post rank beta my market weight and beta weight
 sort beta_decile mpportnum
 egen unique_beta_and_mpportnum = group(beta_decile mpportnum)
+
 save input_for_crosssectional.dta, replace
 
