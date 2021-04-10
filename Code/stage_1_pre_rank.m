@@ -60,6 +60,6 @@ for i =1:length(stock_symbols_refrences)-1
     
 end 
 %%
-pre_rank_table = array2table(pre_rank_matrix,'VariableNames',{'annual','mmonth','kypermno','mtcap','mretx','risk_free','maret','cma','hml','smb','rmw','pre_ranked_beta'});%we changed myear to annual because of the porflio data uses annual
-writetable( pre_rank_table, 'pre_rank_table.csv')
+pre_rank_table = array2table(pre_rank_matrix,'VariableNames',{'kypermno','expected_return_stock','esg_minus_rf','market_minus_rf','hml','smb','rmw','cma','tcap','cal_year','mmonth','pre_ranked_beta_market','pre_ranked_esg'});%we changed myear to annual because of the porflio data uses annual
+writetable( pre_rank_table, 'data/pre_rank_table.csv')
 

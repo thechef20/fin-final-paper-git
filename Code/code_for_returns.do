@@ -10,7 +10,7 @@ cd /Users/matt/Final_Paper_Git/Code/data
 import excel using file_ESG_connolly.xlsx, sheet("Sheet2") firstrow
 drop if price ==0
 drop returns
-gen returns = (price[_n]-price[_n+1])/price[_n]
+gen returns = (price[_n+1]-price[_n])/price[_n]
 gen date3 = mdy(mmonth, day, cal_year)
 format date3 %td
 save ESG_returns.dta,replace
@@ -103,9 +103,11 @@ drop rf
 order kypermno expected_return_stock ESG_minus_rf market_minus_rf hml smb rmw cma tcap cal_year mmonth
 sort kypermno cal_year mmonth
 *** Getting ready to put into matlab ***
-
-egen time_match = group(mmonth cal_year)
 export delimited using "ESG_and_five_factors.csv", replace
+
+*shrinking dataset for testing 
+drop if kypermno>10026
+export delimited using "ESG_and_five_factors_testing.csv", replace
 
 
 *** Summerization of the data!! ***
