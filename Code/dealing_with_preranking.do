@@ -41,14 +41,15 @@ egen firm_time_id = group(mpportnum cal_year mmonth)
 *** NOTE: We are NOTE using the ESG as the beta decile ***
 * xtile but fastest!
 *we are cleaning some of the extremes from either end of the beta range
-astile beta_decile_toss=pre_ranked_beta_market, nq(25) by(firm_time_id)
+astile beta_decile_toss=pre_ranked_beta_market, nq(25) 
 drop if beta_decile_toss == 1
 drop if beta_decile_toss == 25 
 drop if tcap < 10000
 drop beta_decile_toss
-sum pre_ranked_esg
-
+sum pre_ranked_beta_market
+*I reloved the by(firm_time_id) 
 astile beta_decile=pre_ranked_beta_market, nq(10) by(firm_time_id)
+*astile beta_decile=pre_ranked_beta_market, nq(10)
 
 sort  beta_decile mpportnum
 egen unique_beta_and_mpportnum = group(beta_decile mpportnum)

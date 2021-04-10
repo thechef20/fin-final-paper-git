@@ -1,7 +1,7 @@
 clear 
 cls
 *Matthew Chistolini
-*Last Edited: 4/9/21
+*Last Edited: 4/10/21
 
 * Setting up workspace
 cd /Users/matt/Final_Paper_Git/Code/data
@@ -39,3 +39,45 @@ sort mpportnum beta_decile
 reshape wide mcap_log, i(mpportnum) j(beta_decile)
 
 export delimited using "excel_table/table_1_C_Size", replace
+
+
+
+*making table 1 CMA
+use merged_portfolio_and_preranked_beta_data, clear
+
+astile cma_decile=cma, nq(5)
+astile size_decile_2=tcap, nq(5)
+collapse (mean) expected_return_stock, by(cma_decile size_decile_2)
+
+sort cma_decile size_decile_2
+
+reshape wide expected_return_stock, i(cma_decile) j(size_decile_2)
+
+*making table 1  ESG
+use merged_portfolio_and_preranked_beta_data, clear
+
+astile esg_decile=esg_minus_rf, nq(5)
+astile size_decile_2=tcap, nq(5)
+collapse (mean) expected_return_stock, by( esg_decile size_decile_2)
+drop if missing(size_decile_2)
+
+sort  esg_decile size_decile_2
+
+reshape wide expected_return_stock, i( esg_decile) j(size_decile_2)
+
+
+*making table 1 HML
+use merged_portfolio_and_preranked_beta_data, clear
+
+astile hml_decile=hml, nq(5)
+astile size_decile_2=tcap, nq(5)
+collapse (mean) hml, by(hml_decile size_decile_2)
+drop if missing(size_decile_2)
+
+sort hml_decile size_decile_2
+
+reshape wide hml, i(hml_decile) j(size_decile_2)
+
+
+
+

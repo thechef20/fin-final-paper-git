@@ -7,13 +7,23 @@ cls
 cd /Users/matt/Final_Paper_Git/Code/data
 
 *** importing and cleaning ESG Returns (daily) ***
-import excel using file_ESG_connolly.xlsx, sheet("Sheet2") firstrow
+import excel using file_ESG_connolly.xlsx, sheet("Sheet2") firstrow clear
 drop if price ==0
 drop returns
 gen returns = (price[_n+1]-price[_n])/price[_n]
 gen date3 = mdy(mmonth, day, cal_year)
 format date3 %td
 save ESG_returns.dta,replace
+
+*** importing and cleaning Petrolum Returns (daily) ***
+import excel petroleum_index.xlsx, sheet("Sheet1") firstrow clear
+drop if price ==0 
+gen returns_pet = (price[_n+1]-price[_n])/price[_n]
+gen date3 = mdy(mmonth, day, cal_year)
+format date3 %td
+save pet_returns.dta,replace
+
+
 
 
 *** importings all stocks returns ***
@@ -24,6 +34,9 @@ format date3 %td
 merge m:1  date3 using ESG_returns.dta
 drop _merge
 drop if missing(returns)
+merge m:1  date3 using pet_returns.dta
+drop _merge
+drop if missing(returns_pet)
 save daily_data_with_ESG_returns.dta,replace
 
 *** cleaning the risk free and other FF factors ***
@@ -81,7 +94,7 @@ drop if missing(returns)
 drop if missing(rf)
 drop if missing(kypermno)
 egen collapse_id = group(mmonth cal_year kypermno)
-collapse(mean)  kypermno  (sum) retx returns  rf hml smb rmw cma (mean) tcap cal_year mmonth , by(collapse_id)
+collapse(mean)  kypermno  (sum) returns_pet retx returns  rf hml smb rmw cma (mean) tcap cal_year mmonth , by(collapse_id)
 sort kypermno cal_year mmonth
 drop collapse_id
 
@@ -92,7 +105,9 @@ drop _merge
 
 *** creating rf adjusted colums ***
 gen market_minus_rf = maret - rf
-gen ESG_minus_rf = returns - rf
+******************************Use petroleum firm******************************
+gen ESG_minus_rf = returns - returns_pet
+drop returns_pet
 gen expected_return_stock = retx - rf
 
 drop maret
