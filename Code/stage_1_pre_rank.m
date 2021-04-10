@@ -1,4 +1,4 @@
-% uthor Matt 
+% Author Matt Chistolini
 % Last Edited 4/9/21
 %% Setup Section
 clear; clc;
