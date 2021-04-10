@@ -104,12 +104,14 @@ sort kypermno cal_year mmonth
 *** Getting ready to put into matlab ***
 export delimited using "ESG_and_five_factors.csv", replace
 
+*** Summerization of the data!! ***
+egen kyper_gen = group(kypermno)
+sum  kyper_gen
+sort kyper_gen
+
+
 *shrinking dataset for testing 
 drop if kypermno>10026
 export delimited using "ESG_and_five_factors_testing.csv", replace
 
 
-*** Summerization of the data!! ***
-egen kyper_gen = group(kypermno)
-sum  kyper_gen
-sort kyper_gen
