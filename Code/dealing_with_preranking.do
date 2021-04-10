@@ -49,6 +49,10 @@ drop beta_decile_toss
 sum pre_ranked_esg
 
 astile beta_decile=pre_ranked_esg, nq(10) by(firm_time_id)
+
+sort  beta_decile mpportnum
+egen unique_beta_and_mpportnum = group(beta_decile mpportnum)
+
 sort kypermno cal_year mmonth pre_ranked_esg mpportnum
 
 save merged_portfolio_and_preranked_beta_data.dta, replace
@@ -62,9 +66,7 @@ save merged_portfolio_and_preranked_beta_data.dta, replace
 
 
 *new sort that will be used to merge the post rank beta my market weight and beta weight
-*sort unique_beta_and_mpportnum annual mmonth
 
-*egen unique_beta_and_mpportnum = group(beta_decile mpportnum)
 
 *save input_for_crosssectional.dta, replace
 
