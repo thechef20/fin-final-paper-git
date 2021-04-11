@@ -33,7 +33,7 @@ Order in which to operate files
 (6) mcbeth_maker.do
 
     input: end (3) i.e. merged_portfolio_and_preranked_beta_data
-    output:  "out_of_stata_six_factor.csv" this is sported by unique_beta_and_mpportnum cal_year mmonth and has averages for the 6 factors 
+    output:  "out_of_stata_six_factor.csv" this is sported by unique_beta_and_mpportnum cal_year mmonth and has averages for the 6 factors
 
 (7) cross_sectional_matlab.m
 
@@ -51,3 +51,8 @@ Weird termonoloy conversion
    mretx --> expected_return_stock (it has got rid of the rf rate )
    ESG preranked values: pre_ranked_esg
    market preranked values: pre_ranked_beta_market
+
+
+   ESG_minus_rf: is actually minus ESG daily returns minus the market and rf (we need to check if this is a good idea)
+
+   https://www.connectedpapers.com/main/3e5e76163dee4f4b42492a4e0dfd9112fb432927/The-global-pricing-of-environmental-social-and-governance-ESG-criteria/graph

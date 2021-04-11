@@ -37,17 +37,33 @@ drop mpindno
 sort kypermno cal_year mmonth
 egen firm_time_id = group(mpportnum cal_year mmonth)
 
+save pre_cleaned_preranking_decile.dta, replace
 
 *** NOTE: We are NOTE using the ESG as the beta decile ***
 * xtile but fastest!
 *we are cleaning some of the extremes from either end of the beta range
+sum
+sort pre_ranked_beta_market
 astile beta_decile_toss=pre_ranked_beta_market, nq(25) 
-drop if beta_decile_toss == 1
-drop if beta_decile_toss == 25 
-drop if tcap < 10000
-drop beta_decile_toss
-sum pre_ranked_beta_market
-*I reloved the by(firm_time_id) 
+gen beta_decile_toss_min = beta_decile_toss
+gen min_market = 1 if  tcap < 10000
+collapse (max)  beta_decile_toss (min) min_market beta_decile_toss_min, by(kypermno)
+drop if  (min_market == 1) |(beta_decile_toss_min<2 | beta_decile_toss>24)
+sort beta_decile_toss
+gen beta_to_keep = 1
+drop min_market beta_decile_toss
+save cleaned_preranking_decile.dta, replace
+
+
+
+use pre_cleaned_preranking_decile.dta,clear
+merge m:1  kypermno using cleaned_preranking_decile.dta
+drop if missing(beta_to_keep)
+drop beta_to_keep
+
+drop _merge
+sum
+*I removed the by(firm_time_id) 
 astile beta_decile=pre_ranked_beta_market, nq(10) by(firm_time_id)
 *astile beta_decile=pre_ranked_beta_market, nq(10)
 
