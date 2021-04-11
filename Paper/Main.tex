@@ -3,44 +3,69 @@
 
 \begin{document}
 \section{Introduction and Motivation}
-Over the last decade investors have become increasingly concerned with extra factors outside of financials to address the performance of stocks. Research from Mckendsey has shown that there is a direct correlation between diversity inside of executive team leadership and company performance. A rising threat of global climate related issues and workplace culture to determine top talent have all become extremely important for company management to consider on the basis of long term performance.  
+Asset pricing has a long history of models and theories governing how investor view the prices of assets. Over the last decade investors have become increasingly interested in  factors outside of traditional financial metrics when assessing the possability of an investments returns.Much of this enthusiasm has been based on ESG, Enviomental Social Goverance, investing that considers how firms respond to these factors as potential impetuses for excess performance.  Research from Mckendsey has shown that there is a direct correlation between diversity inside of executive team leadership and company performance. A rising threat of global climate related issues and workplace culture to determine top talent have all become extremely important for company management to consider on the basis of long term performance.  
 
 
 this paper will be broken up into five  sections. \textit{Section \ref{Literature}} will provide a  brief literature review of papers looking abnormal performance around ESG criteria as well as discussion of possible asset pricing models to capture ESG factors in performance. Next in  \textit{ Section \ref{Data}}  I will discuss the data used in this papers as well as the data cleaning process and summary statistics. Following the Data, \textit{Section \ref{Methodology}} will breakdown of the methodology for the paper. Finally, \textit{Section \ref{Results}}  will summarize the results of the regressions, \textit{Section \ref{Robustness}} will check the robustness of the results and \textit{Section \ref{Conclusion}} will provide a conclusion and possible extensions for next steps. 
 
 \section{Literature Review}
+to account for the ESG factor of a five factor famma french model, the authers used the S\&P ESG index as the high ESG index and the S\&P petroleum index as the low index creating a facotr by subtracting the retunrs from the high ESG portfolio from the low ESG portfolio. \cite{Gregory2020TheGP}
 \label{Literature}
 
 \section{Data}
 \label{Data}
-The data used for this paper was soured three databases. The daily performance of the individual stock prices was collected from CRSP's primarily daily stock prices. Data on the ESG portfolio was extracted from compustat as the daily average returns for MSCI World ESG Focus Index. Finally, daily Fama French factors for SMB, CMA,HML, and RMW were sourced from the Kenneth R. French - Data Library.  The time period for the data for the paper is between June 2011 and December 2020. The segment of stock data is determined by the length of available performance for the MSCI World ESG Focus Index as this index was initiated in June 2011. Daily values were summed and collapsed to created monthly values for factor and individual security performance. 
-
-we looking 830,891 observation for  12,194 unique stocks which gives an average of 68months of data 
+The data used for this paper was soured three databases. The daily performance of the individual stock prices was collected from CRSP's primarily daily stock prices. Data on the ESG portfolio and well as the petroleum portfolio was extracted from compustat as the daily average returns for MSCI World ESG Focus Index and S/&P petroleum index. Finally, daily Fama French factors for SMB, CMA,HML, and RMW were sourced from the Kenneth R. French - Data Library.  An ESG factor, demoted as EMP (ESG minus petroleum), was created by taking the  MSCI World ESG Focus Index returns and subtracting them from the  S\&P petroleum index. Petroleum companies act as a stand in for the opposite of ESG as the  petroleum space is particularly inept to adapt to ESG  changes, a fact well documented in academic literature \cite{Frynas2005TheFD}. In addition, in section \ref{Robustness} for robustness I will repeat the analysis replacing the  S\&P petroleum index with S\&P Metals & Mining Select Industry Index as the opposed portfolio for the EMP factor. It has been also well documented that the mining industry also struggles to adapt to ESG factors due to the nature of the industry \cite{Kapelus2002MiningCS}.
+ 
+ 
+ Data was collected between June 2011 and March 2021. The started was determined by the initiation of the MSCI ESG index. With the selected window, CRSP data for daily returns was collected on each available company. Daily returns for the individual companies as well as each of the Fama factors and the EMP factor was collapsed by month by suming the daily changes in each given month and year. The collapses resulted in 830,891 observation for 12,194 unique stocks which gives an average of 68months of data for each unique security.  outlined in table \hl{1} is some of the summary statistics for the raw data.
 
 to reduce some of the tail behavior we dropped the top and bottom  4\% of pre ranked beta values as well as companies with market values less tham 10 million
 \section{Methodology}
 \label{Methodology}
-As dicussed in the literature review there are numerous different models for assessing asset pricing and abnormal returns. In this paper I will be using an extension on on Fama French's 2015 paper ``A five factor asset pricing model".
+As discussed in the literature review there are numerous different models for assessing asset pricing and abnormal returns. In this paper I will be using an extension on on Fama French's 2015 paper ``A five factor asset pricing model". This method of analysis is builds off of the famma french three factor model and relies on the 2 pass sort to assign a series of beta decile and size decile based portfolios. Breaking the portfolios into these distinct groups allows for further analysis of the effect across these two factors do asses the abnormal returns. 
+
+to determine the beta deciles for individual secutires a regression 
+
+\begin{equation}
+    R_{it}^e = a_{i,t} + \beta_{i1,t}(R_{m,t}-R_{rf,t})+\beta_{i2,t}(R_{m,t-1}-R_{rf,t-1})+\epsilon_{i,t}
+\end{equation}
+\begin{equation}
+    \beta_{sum} = \sum_{k=1}^2\beta_{ik,t}
+\end{equation}
+
+
+
+Decile-sorted indexes based on
+market capitalization
+TO find the beta deciles 
+
 
 To capture abnormal returns we will consider 5 factors that is the 5 factors from the famma french paper small minus big(SMB),CMA, HML, and market portfolio(I.e model, consisting of market, size, value, profitability, and investment factors;). In addition I will ad another term to address how stocks move with the movement to a ESG porlfio. For this purpose we will use the MSCI ESG all world index. 
 
 \begin{equation}
 \begin{split}
-    R_{it}^e = a_i+b_i(R_{Mt}-R_{fr})+s_iSMB_t+ & h_iHML_t+ & r_iRMW_t+c_iCMA+e_i(R_{ESG t}-R_{rf})
+    R_{it}^e = a_i+b_i(R_{Mt}-R_{fr})+s_iSMB_t+ & h_iHML_t+ & r_iRMW_t+c_iCMA_t+e_iEMP_t
     \end{split}
     \label{six_factor_basic_reg}
 \end{equation}
-In equation \eqref{six_factor_basic_reg} $HML_{t}$ is the difference between the returns on diversified portfolios of high and low book to market stocks, $SMB_{t}$ i the return on a diversified portfolio of small stocks minus the return on a diversified portfolio of big stocks, $RMW_t$ is the difference between the returns on diversified portfolios of stocks with robust and weak profitability,$CMA_{t}$ is the difference between the returns on diversified portfolios of the stocks of low and high investment firms, $e^e_{it}$ is the return of the individual secutiy minus the risk freee rate ($R_{it}-R_{rf}$)
+In equation \eqref{six_factor_basic_reg} $HML_{t}$ is the difference between the returns on diversified portfolios of high and low book to market stocks, $SMB_{t}$ i the return on a diversified portfolio of small stocks minus the return on a diversified portfolio of big stocks, $RMW_t$ is the difference between the returns on diversified portfolios of stocks with robust and weak profitability,$CMA_{t}$ is the difference between the returns on diversified portfolios of the stocks of low and high investment firms,$EMP_t$ is the difference between MSCI World ESG Focus Index returns and the S\&P petroleum index. finally, $R^e_{it}$ is the return of the individual secutiy minus the risk freee rate ($R_{it}-R_{rf}$)
 
 
 \section{Results}
 \label{Results}
 
 \section{Robustness Checks}
+ %as dicussed in section \ref{Data} [talk about using mining instead of petrolum ]
 \label{Robustness}
 
 \section{Conclusion}
 \label{Conclusion}
+
+\bibliography{Matt_Bib.bib}{}
+\bibliographystyle{plain}
+%\nocite{*}
+%\printbibliography
+
 \section{Code}
 \input{Paper/Code_files}
 \end{document}
