@@ -39,7 +39,6 @@ egen firm_time_id = group(mpportnum cal_year mmonth)
 
 save pre_cleaned_preranking_decile.dta, replace
 
-*** NOTE: We are NOTE using the ESG as the beta decile ***
 * xtile but fastest!
 *we are cleaning some of the extremes from either end of the beta range
 sum
@@ -62,9 +61,14 @@ drop if missing(beta_to_keep)
 drop beta_to_keep
 
 drop _merge
+*** shrink to big and small
+gen holder = 1 if mpportnum>5
+replace holder = 2 if mpportnum<6
+drop mpportnum
+gen mpportnum = holder
 sum
 *I removed the by(firm_time_id) 
-astile beta_decile=pre_ranked_beta_market, nq(10) by(firm_time_id)
+astile beta_decile=pre_ranked_beta_market, nq(5) by(firm_time_id)
 *astile beta_decile=pre_ranked_beta_market, nq(10)
 
 sort  beta_decile mpportnum

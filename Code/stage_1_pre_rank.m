@@ -24,10 +24,10 @@ mmonth = A{:,11};
 
 upper_counter =0;
 lower_counter = 0;
-pre_rank_matrix = nan(length(stock_symbols_refrences),13); %if I wanted individual beta we would extend this to 7
-for i =1:length(stock_symbols_refrences)-1
+pre_rank_matrix = nan(length(stock_symbols_refrences),13); %adjust the last term if you want to carry more values
+for i =2:length(stock_symbols_refrences);
     current_stock = stock_symbols_refrences(i);
-    next_stock =stock_symbols_refrences(i+1);
+    next_stock =stock_symbols_refrences(i-1);
     r_and_m_name = [current_stock individual_stock_return(i) ESG_returns(i) market_reutrns(i) cma(i) hml(i) smb(i) rmw(i) individual_stock_market_cap(i) cal_year(i) mmonth(i)];%year and month and name
     
     if current_stock == next_stock
@@ -36,9 +36,9 @@ for i =1:length(stock_symbols_refrences)-1
                 upper_counter = n_upper;
             end
             %indexing seems sus!! 4/9/21
-            market = [market_reutrns(1+i-n_lower-upper_counter:i+1) market_reutrns(i-n_lower-upper_counter:i)];
-            ESG_retun_data = [ESG_returns(1+i-n_lower-upper_counter:i+1) ESG_returns(i-n_lower-upper_counter:i)];
-            individual = [individual_stock_return(1+i-n_lower-upper_counter:i+1)]; 
+            market = [market_reutrns(i-n_lower-upper_counter:i) market_reutrns(i-n_lower-upper_counter-1:i-1)];
+            ESG_retun_data = [ESG_returns(i-n_lower-upper_counter:i) ESG_returns(i-n_lower-upper_counter-1:i-1)];
+            individual = [individual_stock_return(i-n_lower-upper_counter:i)]; 
             beta_market = regress(individual , market)';
             beta_ESG = regress(individual , ESG_retun_data)';
             sum_o_beta_market = sum(beta_market);

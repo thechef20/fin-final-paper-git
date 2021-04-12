@@ -10,7 +10,7 @@ cd /Users/matt/Final_Paper_Git/Code/data
 import excel using file_ESG_connolly.xlsx, sheet("Sheet2") firstrow clear
 drop if price ==0
 drop returns
-gen returns = (price[_n+1]-price[_n])/price[_n]
+gen returns = (price[_n]-price[_n-1])/price[_n-1]
 gen date3 = mdy(mmonth, day, cal_year)
 format date3 %td
 save ESG_returns.dta,replace
@@ -18,7 +18,7 @@ save ESG_returns.dta,replace
 *** importing and cleaning Petrolum Returns (daily) ***
 import excel petroleum_index.xlsx, sheet("Sheet1") firstrow clear
 drop if price ==0 
-gen returns_pet = (price[_n+1]-price[_n])/price[_n]
+gen returns_pet = (price[_n]-price[_n-1])/price[_n-1]
 gen date3 = mdy(mmonth, day, cal_year)
 format date3 %td
 save pet_returns.dta,replace
