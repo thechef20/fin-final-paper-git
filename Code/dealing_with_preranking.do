@@ -9,36 +9,103 @@ cls
 
 cd /Users/matt/Final_Paper_Git/Code/data
 
-import delimited using pre_rank_table.csv,clear
+import delimited using ESG_and_five_factors.csv,clear
 *removing data where the years don't have data data b/c it is less than 2 yr
-drop if missing(pre_ranked_esg)
 save pre_rank_table.dta, replace
 
 
-*import data on the portoflios
+*import data on the equle weight portoflios
 use sfz_portm,clear 
 gen cal_year = annual
 drop  annual
 *get rid of the profolios which do not add value
 drop if mpindno>1000091 
 drop if mpindno<1000082
-save porflio_weights_data_clean.dta, replace
+save equal_market_cap_proflios.dta, replace
+
+*import data on the beta decile portoflios
+use sfz_portd,clear 
+gen cal_year = annual
+drop  annual
+*get rid of the portfolios which do not add value
+drop if pindno>1000111 
+drop if pindno<1000102
+save equal_beta_weights_data_clean.dta, replace
+
+
 
 *this file came from MATLAB
 use pre_rank_table , clear
 *meging the market weight prolfios onto to data
-merge m:1 kypermno cal_year using porflio_weights_data_clean.dta 
+merge m:1 kypermno cal_year using equal_market_cap_proflios.dta 
 keep if _merge == 3
 drop _merge
 drop mppflg
 drop keyset
 drop mpstat
 drop mpindno
+gen size_ports = mpportnum
+drop mpportnum
 sort kypermno cal_year mmonth
-egen firm_time_id = group(mpportnum cal_year mmonth)
+egen firm_time_id_weight = group(size_ports cal_year mmonth)
 
-save pre_cleaned_preranking_decile.dta, replace
+*merging the beta portfolios onto to data
+merge m:1 kypermno cal_year using equal_beta_weights_data_clean.dta 
 
+
+keep if _merge == 3
+drop _merge
+drop ppflg
+drop keyset
+drop pstat
+drop pindno
+gen beta_ports = pportnum
+drop pportnum
+sort kypermno cal_year mmonth
+
+save returns_factors_with_potfolios.dta, replace
+
+
+
+
+
+
+
+
+
+
+
+
+******** This should probs be its own doc********
+
+
+*size porlfios first
+use returns_factors_with_potfolios.dta, clear
+
+sort size_ports 
+collapse (mean) expected_return_stock hml smb rmw cma esg_minus_rf market_minus_rf, by(size_ports cal_year mmonth)
+sort cal_year mmonth
+egen indexy_time_var = group(cal_year mmonth)
+sort size_ports cal_year mmonth
+export delimited "size_porflios_and_returns.csv",replace
+
+
+
+
+
+*beta porlfios first
+use returns_factors_with_potfolios.dta, clear
+
+sort beta_ports 
+collapse (mean) expected_return_stock hml smb rmw cma esg_minus_rf market_minus_rf, by(beta_ports cal_year mmonth)
+sort cal_year mmonth
+egen indexy_time_var = group(cal_year mmonth)
+sort beta_ports cal_year mmonth
+export delimited "beta_porflios_and_returns.csv",replace
+
+
+
+/* we are killing this 
 * xtile but fastest!
 *we are cleaning some of the extremes from either end of the beta range
 sum
@@ -77,6 +144,7 @@ egen unique_beta_and_mpportnum = group(beta_decile mpportnum)
 sort kypermno cal_year mmonth pre_ranked_beta_market mpportnum
 
 save merged_portfolio_and_preranked_beta_data.dta, replace
+*/
 
 
 

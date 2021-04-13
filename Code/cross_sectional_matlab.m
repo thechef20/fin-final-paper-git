@@ -1,7 +1,7 @@
 %Matt Chistolini
-%Last edited 4/10/21
+%Last edited 4/12/21
 clear; clc;
-A = readtable("data/out_of_stata_six_factor.csv");
+A = readtable("data/size_porflios_and_returns.csv");
 porflio_number = A{:,3};
 expected_return_stock = A{:,4};
 hml = A{:,5};
@@ -28,10 +28,10 @@ for i = 1:length(porflio_number)-1
         cma_i = cma(i-counter:end);
         esg_factor_i = esg_factor(i-counter:end);
         market_factor_i =market_factor(i-counter:end);
-        factors = [hml_i smb_i rmw_i cma_i  esg_factor_i];
+        %factors = [hml_i smb_i rmw_i cma_i  esg_factor_i];
         factors_w_market = [market_factor_i hml_i smb_i rmw_i cma_i  esg_factor_i];
         %reg_1 = regress(returns_i, factors);
-        reg_1 = regress(returns_i, factors_w_market);
+        reg_1 = fitlm(returns_i, factors_w_market)
         out_for_reg_1 = [out_for_reg_1 reg_1];
         break
     end
@@ -49,10 +49,12 @@ for i = 1:length(porflio_number)-1
         cma_i = cma(i-counter:i);
         esg_factor_i = esg_factor(i-counter:i);
         market_factor_i =market_factor(i-counter:i);
-        factors = [hml_i smb_i rmw_i cma_i esg_factor_i];
+        %factors = [hml_i smb_i rmw_i cma_i esg_factor_i];
         factors_w_market = [market_factor_i hml_i smb_i rmw_i cma_i  esg_factor_i];
+        tabl = table(market_factor_i, hml_i, smb_i, rmw_i, cma_i,  esg_factor_i,returns_i)
         %reg_1 = regress(returns_i, factors);
-        reg_1 = regress(returns_i, factors_w_market);
+        %reg_1 = regress(returns_i, factors_w_market);
+        %reg_1 = regress(returns_i, factors_w_market);
         out_for_reg_1 = [out_for_reg_1 reg_1];
         counter = 0;
         end 
