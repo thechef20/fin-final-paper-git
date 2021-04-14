@@ -22,11 +22,16 @@ to account for the ESG factor of a five factor famma french model, the authers u
 \label{Data}
 The data used for this paper was soured three databases. The daily performance of the individual stock prices was collected from CRSP's primarily daily stock prices. Data on the ESG portfolio and well as the petroleum portfolio was extracted from compustat as the daily average returns for MSCI World ESG Focus Index and S/&P petroleum index. Finally, daily Fama French factors for SMB, CMA,HML, and RMW were sourced from the Kenneth R. French - Data Library.  An ESG factor, demoted as EMP (ESG minus petroleum), was created by taking the  MSCI World ESG Focus Index returns and subtracting them from the  S\&P petroleum index. Petroleum companies act as a stand in for the opposite of ESG as the  petroleum space is particularly inept to adapt to ESG  changes, a fact well documented in academic literature \cite{Frynas2005TheFD}. In addition, in section \ref{Robustness} for robustness I will repeat the analysis replacing the  S\&P petroleum index with S\&P Metals & Mining Select Industry Index as the opposed portfolio for the EMP factor. It has been also well documented that the mining industry also struggles to adapt to ESG factors due to the nature of the industry \cite{Kapelus2002MiningCS}.
  
- \input{Code/data/desc1}
  
- Data was collected between June 2011 and March 2021. The started was determined by the initiation of the MSCI ESG index. With the selected window, CRSP data for daily returns was collected on each available company. Daily returns for the individual companies as well as each of the Fama factors and the EMP factor was collapsed by month by suming the daily changes in each given month and year. The collapses resulted in 830,891 observation for 12,194 unique stocks which gives an average of 68months of data for each unique security.  outlined in table \hl{1} is some of the summary statistics for the raw data.
 
-to reduce some of the tail behavior we dropped the top and bottom  4\% of pre ranked beta values as well as companies with market values less tham 10 million
+ 
+ Data was collected between June 2011 and March 2021. The started was determined by the initiation of the MSCI ESG index. With the selected window, CRSP data for daily returns was collected on each available company. Daily returns for the individual companies as well as each of the Fama factors and the EMP factor was collapsed by month by suming the daily changes in each given month and year. The collapses resulted in 830,889 observation for 12,194 unique stocks which gives an average of 68 months of data for each unique security.  Outlined in table are  some of the summary statistics for the raw data.
+ 
+ \begin{center}
+     \textbf{Table 1}\\
+ \input{Code/data/desc1}
+ \end{center}
+ 
 \section{Methodology}
 \label{Methodology}
 As discussed in the literature review there are numerous different models for assessing asset pricing and abnormal returns. In this paper I will be using an extension on on Fama French's 2015 paper ``A five factor asset pricing model". This method of analysis is builds off of the famma french three factor model and relies on the 2 pass sort to assign a series of beta decile and size decile based portfolios. Breaking the portfolios into these distinct groups allows for further analysis of the effect across these two factors do asses the abnormal returns. 
