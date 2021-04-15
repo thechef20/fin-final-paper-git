@@ -35,9 +35,9 @@ for i = 1:length(porflio_number)-1
         reg_total_disp = fitlm(factors_w_market_tbl);
         cofficents_include_a= table2array(reg_total_disp.Coefficients(:,1));
         cofficents_no_a = cofficents_include_a(2:end);
-        SE_individual = table2array(reg_total_disp.Coefficients(:,2));
+        P_Vals_individual = table2array(reg_total_disp.Coefficients(:,4));
         out_for_reg_1 = [out_for_reg_1 cofficents_no_a];
-        all_SE = [all_SE  SE_individual];
+        all_SE = [all_SE  P_Vals_individual];
         all_coff =[all_coff cofficents_include_a];
         break
     end
@@ -61,9 +61,9 @@ for i = 1:length(porflio_number)-1
         reg_total_disp = fitlm(factors_w_market_tbl);
         cofficents_include_a= table2array(reg_total_disp.Coefficients(:,1));
         cofficents_no_a = cofficents_include_a(2:end);
-        SE_individual = table2array(reg_total_disp.Coefficients(:,2));
+        P_Vals_individual = table2array(reg_total_disp.Coefficients(:,2));
         out_for_reg_1 = [out_for_reg_1 cofficents_no_a];
-        all_SE = [all_SE  SE_individual];
+        all_SE = [all_SE  P_Vals_individual];
         all_coff =[all_coff cofficents_include_a];
         counter = 0;
         end 
