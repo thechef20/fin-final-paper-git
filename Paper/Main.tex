@@ -36,7 +36,7 @@ The data used for this paper was sourced from three datasets. The daily performa
 \label{Methodology}
 As discussed in the literature review there are numerous different models for assessing asset pricing and abnormal returns. In this paper I will be using an extension on on Fama French's 2015 paper ``A five factor asset pricing model". This method of analysis is builds off of the famma french three factor model and relies on the 2 pass sort with an assign series of beta decile and size decile based portfolios. Breaking the portfolios into these distinct groups allows for further analysis of the effect across these two factors to assess relational interdependency. 
 
-In the preliminary analysis of the ESG factor I sort securties  on beta as well as size deciles. Each security will be assigned a decile for beta and size according the the CRSP /NYSE american beta decile for beta and the CRSP Nasdaq Market Capitalization portfolio for size. After sorting each of the securities by Beta and size decile  300,264 of the original 830,889 data points had matches for both portfolios. To capture the effect of size and each of the Fama French factors and ESG factor I ran the reguression in equation \eqref{six_factor_basic_reg} on the cleaned data set. 
+In the preliminary analysis of the ESG factor I sort securties  on beta as well as size deciles. Each security will be assigned a decile for beta and size according the the CRSP /NYSE american beta decile for beta and the CRSP Nasdaq Market Capitalization portfolio for size. After sorting each of the securities by Beta and size decile  300,264 of the original 830,889 data points had matches for both portfolios. To estimate the factor sensitivities base on the discribed decile groups I ran the regression in equation \eqref{six_factor_basic_reg} on the cleaned data set. 
 
 
 
@@ -49,43 +49,56 @@ In the preliminary analysis of the ESG factor I sort securties  on beta as well 
     \end{split}
     \label{six_factor_basic_reg}
 \end{equation}
-Where:
+
 \begin{center}
+Where:\\
     $R_{i,t}^e = R_{it}-R_{rf,t}$
 \end{center}
 
-***Dicuss the second pass***
-
+Next, I used the data from equation \eqref{six_factor_basic_reg} to run the second regression in the two pass sort. The second pass of the two pass sort is  described in the equation  \eqref{second_pass} and is used to obtain the risk premia. To consolidate the the risk premium across time a simple average as described in equation \eqref{summing_lamda} is used to collapse the risk premia for each of the given factors. 
 
 \begin{equation}
     E[R^e_{t}]= b_t\lambda_1+s_t\lambda_2 +h_t \lambda_3 +r_t\lambda_4 +c_t \lambda_4 + e_t \lambda_5
+    \label{second_pass}
 \end{equation}
-In equation \eqref{six_factor_basic_reg} 
+
+\begin{equation}
+    \frac{1}{T}\sum^T_{t=1}\lambda_{i,t}
+    \label{summing_lamda}
+\end{equation}
+\begin{center}
+    where:\\
+    T: is equal to the number of months in sample
+\end{center}
+
+
 
 
 \section{Results}
 \label{Results}
-table 3 in represents a matrix of values for the first pass in the fama french two pass sort, described in equation \eqref{six_factor_basic_reg}. The column axis is the distinct size deciles where 1 is the smallest market cap companies and 10 is the declie with the largest market cap companies. The row axis includes estimated coefficients for the intercept, five Fama French factors and the EMS factor. $HML_{t}$ is the difference between the returns on diversified portfolios of high and low book to market stocks, $SMB_{t}$ i the return on a diversified portfolio of small stocks minus the return on a diversified portfolio of big stocks, $RMW_t$ is the difference between the returns on diversified portfolios of stocks with robust and weak profitability,$CMA_{t}$ is the difference between the returns on diversified portfolios of the stocks of low and high investment firms,$EMP_t$ is the difference between MSCI World ESG Focus Index returns and the S\&P petroleum index. finally, the intercept is the excess returns for the given decile.The results in this table demonstrate that for HML, CMA and EMP factor there is a size based relationship where in the larger the size decile the smaller the effect is on the factor. In addition, the EMP factor also exhibits a  a consistent negative relationship between the EGS factor and returns. This relationship indicates that investors are actually paying a premium to invest in ESG companies over the contra EGS counterparts.
+Table 3 in represents a matrix of values for the first pass in the fama french two pass sort, described in equation \eqref{six_factor_basic_reg}. The column axis is the distinct size deciles where 1 is the smallest market cap companies and 10 is the declie with the largest market cap companies. The row axis includes estimated coefficients for the intercept, five Fama French factors and the EMS factor. $HML_{t}$ is the difference between the returns on diversified portfolios of high and low book to market stocks, $SMB_{t}$ i the return on a diversified portfolio of small stocks minus the return on a diversified portfolio of big stocks, $RMW_t$ is the difference between the returns on diversified portfolios of stocks with robust and weak profitability,$CMA_{t}$ is the difference between the returns on diversified portfolios of the stocks of low and high investment firms,$EMP_t$ is the difference between MSCI World ESG Focus Index returns and the S\&P petroleum index. finally, the intercept is the excess returns for the given decile.The results in this table demonstrate that for HML, CMA and EMP factor there is a size based relationship where in the larger the size decile the smaller the effect is on the factor. In addition, the EMP factor also exhibits a  a consistent negative relationship between the EGS factor and returns. This relationship indicates that investors are actually paying a premium to invest in ESG companies over the contra ESG counterparts. Moving onto the second step in the two pass sort to asess the risk premia, 
 
-Moving onto the 
-Analysing our results from the methology  stages of the two pass sort we would expect to see  
-
+Moving onto the analysing the results of the second stage in the two pass sort we would expect to see that   
+% size cofficents
 \begin{center}
 \input{Paper/prelim_size}\\
 \textbf{Table 3:} Size decile by estimated coefficients for the  five fama french factors and EMP factor
 \end{center}
+% size p vals
 \begin{center}
 \input{Paper/p_vals_size_prelim}\\
 \textbf{Table 4:} Size decile by p-values for table 3
-    
 \end{center}
-
-
+% beta cofficents
 \begin{center}
 \input{Paper/prelim_beta}\\
 \textbf{Table 5:} beta decile by estimated coefficients for the  five fama french factors and EMP factor
 \end{center}
-
+% beta p vals
+\begin{center}
+\input{Paper/p_vals_beta_prelim}\\
+\textbf{Table 6:} Size decile by p-values for table 5
+\end{center}
 
 To capture abnormal returns we will consider 5 factors that is the 5 factors from the famma french paper small minus big(SMB),CMA, HML, and market portfolio(I.e model, consisting of market, size, value, profitability, and investment factors;). In addition I will ad another term to address how stocks move with the movement to a ESG porlfio. For this purpose we will use the MSCI ESG all world index. 
 \section{Robustness Checks}
@@ -103,7 +116,7 @@ To capture abnormal returns we will consider 5 factors that is the 5 factors fro
 
 
 \vspace{1cm}
-\textbf{Table 2:}things\\
+\textbf{Table 2:} This table shows many things\\
 \vspace{1cm}
 
 
