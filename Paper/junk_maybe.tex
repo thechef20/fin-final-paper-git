@@ -1,0 +1,9 @@
+To determine the beta deciles for individual securities first a beta must be calculate for each security. To calculate the betas, a  simple regression outlined in equation \eqref{prerank_reg} was preformed. In this regression, a vector of  excess market returns in the current period and a vector of market returns from the previous period is regressed on a vector of current periods individual stock excess returns (i.e $R_{i,t}-R_{rf,t}$). The time movements for the data moved in month increments and the length of the vector ranged for 12 month to 60 months depending on the availability of data. Next, the beta values are summed together to get the pre-ranking beta value. 
+
+\begin{equation}
+    R_{i,t}^e = a_{i,t} + \beta_{i1,t}(R_{m,t}-R_{rf,t})+\beta_{i2,t}(R_{m,t-1}-R_{rf,t-1})+\epsilon_{i,t}
+    \label{prerank_reg}
+\end{equation}
+\begin{equation}
+    \beta_{sum} = \sum_{k=1}^2\beta_{ik,t}
+\end{equation}

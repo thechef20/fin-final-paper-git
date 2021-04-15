@@ -17,10 +17,13 @@
 \usepackage{bm}
 \usepackage{setspace}
 \newcommand{\ba}{\backslash}
-\doublespacing
+%\doublespacing
+
 \usepackage{afterpage}
 \usepackage{listings}
 \usepackage{geometry} %may be sus
+\newgeometry{margin=1 in}
+
 \usepackage[framed,numbered]{matlab-prettifier}
 % turn "backspace" character (ASCII 8) into a tab (9) to avoid Matlab warning backspace
 \catcode8=9
@@ -33,6 +36,7 @@
 
 \newcommand{\spacer}{\vspace{6mm} \noindent}
 \usepackage{parskip}% http://ctan.org/pkg/parskip
+	\setstretch{2}
 
 \usepackage{enumitem}
 
