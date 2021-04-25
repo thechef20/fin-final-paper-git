@@ -6,12 +6,29 @@ cls
 * Setting up workspace
 *ssc install astile
 *help astile
+*ssc install estout, replace
 
 cd /Users/matt/Final_Paper_Git/Code/data
 
 import delimited using ESG_and_five_factors.csv,clear
 *removing data where the years don't have data data b/c it is less than 2 yr
 save pre_rank_table.dta, replace
+
+*creating summary table
+
+drop kypermno
+drop cal_year
+gen EMP = esg_minus_rf
+drop  esg_minus_rf
+gen excess_returns  = expected_return_stock
+drop expected_return_stock
+drop mmonth
+*eststo: quietly
+eststo clear
+eststo: estpost summarize excess_returns market_minus_rf hml smb rmw cma EMP tcap
+*est store a 
+
+esttab using desc1.tex, cells("mean sd min max") replace  nodepvar
 
 
 *import data on the equle weight portoflios
@@ -89,6 +106,17 @@ egen indexy_time_var = group(cal_year mmonth)
 sort size_ports cal_year mmonth
 export delimited "size_porflios_and_returns.csv",replace
 
+
+*building summary tables 
+eststo clear
+gen excess_returns  = expected_return_stock
+gen EMP = esg_minus_rf
+drop  esg_minus_rf
+drop expected_return_stock
+estpost tabstat excess_returns market_minus_rf hml smb rmw cma EMP, by(size_ports) statistics(mean) columns(statistics) listwise
+*est store size
+
+esttab using size_summary_stat_size.tex, cells("mean(fmt(4))") replace label nonote nomtitle nonumber nostar unstack 
 
 
 
