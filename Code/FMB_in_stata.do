@@ -21,31 +21,24 @@ outreg2 using FF_pass_2.tex, replace ctitle(Size Portoflios)
 
 use first_function_for_size,clear
 drop  _obs
-
 gen portoflio_numer = _TimeVar
 drop _TimeVar
 drop _Cons
 drop _adjR2
-
-eststo clear
 ds
 local beta_list = r(varlist)
 disp "`beta_list'"
-ds
+
 foreach v in `beta_list'{
-	format `v' %6.3g
-// 	generate delta_`v' = round(`v',0.2)
-// 	drop `v'
-// 	gen `v' = delta_`v'
-// 	drop  delta_`v'
-
+	gen LLL_`v' = round(`v',.001)
+	drop `v'
+	gen `v' = LLL_`v'
+	drop LLL_`v'
 }
-
-
+eststo clear
 ds
 estpost tabstat `r(varlist)', by(portoflio_numer)
-ds
-esttab  using beta_output_inital.tex, cells("`r(varlist)''") replace nodepvar  
+esttab  using beta_output_inital.tex, cells("`beta_list'") replace noobs nodepvar nomtitle
 *esttab using desc1.tex, cells("mean sd min max") replace  nodepvar
 
 
