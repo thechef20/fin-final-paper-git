@@ -11,8 +11,10 @@ cd /Users/matt/Final_Paper_Git/Code/data
 * size based porfolios
 import delimited size_porflios_and_returns.csv, clear
 
+gen emp = esg_minus_rf
+drop esg_minus_rf
 xtset indexy_time_var size_ports 
-asreg expected_return_stock market_minus_rf  hml smb rmw cma esg_minus_rf, fmb newey(1) first save(first_function_for_size)
+asreg expected_return_stock market_minus_rf  hml smb rmw cma emp, fmb newey(1) first save(first_function_for_size)
 
 **********need to add this to my LATEX doc
 outreg2 using FF_pass_2.tex, replace ctitle(Size Portoflios) tex(fragment)
@@ -46,8 +48,11 @@ esttab  using size_output_inital.tex, cells("`size_list'") replace noobs nodepva
 
 * beta based porfolios
 import delimited beta_porflios_and_returns.csv, clear
+
+gen emp = esg_minus_rf
+drop esg_minus_rf
 xtset indexy_time_var beta_ports 
-asreg expected_return_stock market_minus_rf  hml smb rmw cma esg_minus_rf, fmb newey(1) first save(first_function_for_beta)
+asreg expected_return_stock market_minus_rf  hml smb rmw cma emp, fmb newey(1) first save(first_function_for_beta)
 outreg2 using FF_pass_2.tex, append ctitle(Beta Portoflios) tex(fragment)
 
 

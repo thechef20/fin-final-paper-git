@@ -87,6 +87,7 @@ order kypermno expected_return_stock esg_minus_rf market_minus_rf hml smb rmw cm
 
 *save output_for_crosssectional_final.dta, replace
 export delimited using "matlab_returning_for_crosssectional.csv", replace
+save matlab_returning_for_crosssectional.dta,replace 
 
 
 
