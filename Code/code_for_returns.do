@@ -105,8 +105,8 @@ drop _merge
 
 *** creating rf adjusted colums ***
 gen market_minus_rf = maret - rf
-******************************Use petroleum firm******************************
-gen ESG_minus_rf = returns - returns_pet
+******************************Use petroleum firm****************************** Edited 
+gen ESG_minus_rf = returns_pet - returns 
 drop returns_pet
 gen expected_return_stock = retx - rf
 
