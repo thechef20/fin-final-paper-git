@@ -57,5 +57,5 @@ gen emp = industry_ESG_factor
 drop  industry_ESG_factor
 xtset indexy_time_var size_ports 
 asreg expected_return_stock market_minus_rf  hml smb rmw cma emp, fmb newey(1) first save(parody_3)
-outreg2 using All_Industry_FF_pass_2.tex, replace ctitle(SIC 1) tex(fragment)
+outreg2 using All_Industry_FF_pass_2.tex, replace ctitle(All SIC ) tex(fragment)
 
