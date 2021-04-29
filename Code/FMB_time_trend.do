@@ -1,7 +1,7 @@
 clear 
 cls
 *Matthew Chistolini
-*Last Edited: 4/25/21
+*Last Edited: 4/28/21
 *ssc install asreg
 *ssc install outreg2
 *ssc outfile

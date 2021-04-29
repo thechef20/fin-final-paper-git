@@ -30,12 +30,15 @@ The main methology!
 ****Robustness checks***
 !!Running the new portoflio's with industry!!
 
-(1) cleaning_raw_ESG_data.do
+(1) Industry_ESG_analysis.do
 --> this creates industry prolio reuslts
 
 (1) FMB_time_trend.do
 
---> this will track the time effect of the EMP
+--> this will track the time effect of the EMP feeds in from the end of dealing with pre preranking
+
+(1) SIC_universe.do
+--> feeds in from  "Industry_ESG_analysis.do" half way through. this will explore to see if high minus low here has any mesurable effect 
 
 
 

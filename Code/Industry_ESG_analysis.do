@@ -1,7 +1,7 @@
 clear 
 cls
 *Matthew Chistolini
-*Last Edited: 4/26/21
+*Last Edited: 4/28/21
 * Setting up workspace
 cd /Users/matt/Final_Paper_Git/Code/data
 
@@ -51,6 +51,7 @@ sort SICfirstNumber NumericESG
 *I really don't like the decileing here!!
 *********** Possability it to make it 1 and 10 for certian scores 
 *  fasterxtile but slower!
+save export_for_testing_entire_SIC_universe.dta, replace
 egen  decile_screen = xtile(NumericESG), by(SICfirstNumber) nq(10)
 
 drop if decile_screen>1 & decile_screen<10
@@ -97,7 +98,8 @@ drop if SICfirstNumber  == 9
 drop if SICfirstNumber  == 0
 sort cal_year mmonth
 egen indexy_time_var = group(cal_year mmonth)
-* what this
+save return_data_for_testing_entire_SIC_universe.dta,replace
+* this is the merge from the SIC EGS data to returns
 merge m:m indexy_time_var using industry_ESG_factor.dta
 drop _merge
 drop esg_minus_rf

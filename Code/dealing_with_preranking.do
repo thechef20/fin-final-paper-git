@@ -1,7 +1,7 @@
 clear 
 cls
 *Matthew Chistolini
-*Last Edited: 4/9/21
+*Last Edited: 4/28/21
 
 * Setting up workspace
 *ssc install astile
@@ -11,7 +11,6 @@ cls
 cd /Users/matt/Final_Paper_Git/Code/data
 
 import delimited using ESG_and_five_factors.csv,clear
-*removing data where the years don't have data data b/c it is less than 2 yr
 save pre_rank_table.dta, replace
 
 *creating summary table
@@ -51,7 +50,6 @@ save equal_beta_weights_data_clean.dta, replace
 
 
 
-*this file came from MATLAB
 use pre_rank_table , clear
 *meging the market weight prolfios onto to data
 merge m:1 kypermno cal_year using equal_market_cap_proflios.dta 
