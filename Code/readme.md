@@ -1,4 +1,5 @@
-Order in which to operate files
+The main methology!
+
 
 (1) code_for_returns.do
 
@@ -26,10 +27,15 @@ Order in which to operate files
 
 
 
-
-!!Running the new portoflio's tool!!
+****Robustness checks***
+!!Running the new portoflio's with industry!!
 
 (1) cleaning_raw_ESG_data.do
+--> this creates industry prolio reuslts
+
+(1) FMB_time_trend.do
+
+--> this will track the time effect of the EMP
 
 
 
