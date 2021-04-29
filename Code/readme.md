@@ -14,18 +14,22 @@ Order in which to operate files
       output: : 2 different CSV files which have the collapsed values for beta and size portoflios
 
 
-(3)FMB_in_stata
+(3)FMB_in_stata.do
 
     input: take one of the two outputs from the (2) and than runs the FMB regression
 
     Output: FMB regressions step 1 and 2
 
-(7) FMB_w_o_ESG
+(4) FMB_w_o_ESG.do
       Goal of this set is to look at the data w/o the ESG factor interacting to see what's good!!
       input: end of (5)
 
 
-(8)
+
+
+!!Running the new portoflio's tool!!
+
+(1) cleaning_raw_ESG_data.do
 
 
 
