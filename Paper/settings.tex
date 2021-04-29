@@ -18,6 +18,9 @@
 \usepackage{setspace}
 \newcommand{\ba}{\backslash}
 %\doublespacing
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[colorinlistoftodos]{todonotes}
 
 \usepackage{afterpage}
 \usepackage{listings}
@@ -36,7 +39,7 @@
 
 \newcommand{\spacer}{\vspace{6mm} \noindent}
 \usepackage{parskip}% http://ctan.org/pkg/parskip
-	\setstretch{2}
+	
 
 \usepackage{enumitem}
 
@@ -47,3 +50,9 @@
 
 \usepackage{hyperref}
 \input{Paper/stata_code}
+
+
+% dealing with space 
+    \setstretch{2}
+   \newcommand{\paperspacingwide}{\setstretch{2}}
+   \newcommand{\paperspacingnarrow}{\singlespacing}

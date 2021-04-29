@@ -2,89 +2,34 @@
 \input{Paper/settings}
 
 \begin{document}
+
+%title page
+\input{Paper/title_page}
+
 \section{Introduction and Motivation}
-Asset pricing has a long history of models and theories governing how investors make decisions. Over the last decade, investors have become increasingly interested in factors outside of traditional financial metrics when assessing the possibility of an investment's returns. Much of this enthusiasm has been based on an ESG, Environmental Social Governance, framework. ESG investing considers how firms respond to these factors as potential impetuses for excess performance. This increased attention is especially visible in Morgan Stanley's 2019 survey of the ESG landscape. Morgan Stanley  found that 75\% of assessment managers say that "their firm has adopted sustainable investing." Only two years prior, in 2016, just 10\% of surveyed asset managed had adopted sustainable investing, demonstrating the rapid speed of adoption for ESG investing analysis \cite{morgan_stanley_sustainable_2019}. Practitioners have utilized the ESG framework to reduce risk in their investments while also finding abnormal returns.
+\input{Paper/motivation}
 
-Global climate change presents a host of possible and sizable financial risks from increased water levels, which could threaten major global cities' safety, including Miami, Honk Kong, and Shanghai, with the potential to displace 100's of millions of people \cite{holder_three-degree_nodate}. Global climate change is also shifting the landscape for global agricultural production as more extreme weather conditions, including droughts, pose problems to the most fundamental building block of economic activity. In addition to risk mitigation, investors look to utilize ESG principle for superior returns. A research report published by McKinsey and Company linked gender diversity on executive teams to higher profitability and superior value creation \cite{mckinsey_diversity}.
-
-In addition to risk investing professionals, ESG investing is appealing to a younger set of investors interested in a plethora of global issues from global climate change to diversity and inclusion in the workplace. A study conducted by Morgan Stanley found that millennials investors were twice as likely as the general investing population to invest in a company with social or environmental goals.
-
-This new wave of investor sentiment has created strong tailwinds for sustainable investment projects. In 2020 alone, fund flows into sustainable funds grew by 51 billion dollars which is up over 100\% for the 2019 fund flow into sustainable investment products of about 21, placing total assets under management in sustainable products at over 250B. Fund flows into sustainable products for 2020 accounted for a little less a quarter of all US mutual fund flow and about one-fifteenth of all ETF fund flow according to morningstar \cite{monring_star_ESG}.
-
-To address the impact of ESG factors on stock preformance, this paper is broken into five sections. \textit{Section \ref{Literature}} will provide a  brief literature review of papers looking at abnormal performance around ESG criteria as well as discussion of asset pricing models to capture ESG factors in performance. Next \textit{ Section \ref{Data}}  will provide a brief discussion of the data used in this paper as well as the data cleaning process and summary statistics. Following the Data, \textit{Section \ref{Methodology}} will breakdown of the methodology for the paper. Finally, \textit{Section \ref{Results}}  will summarize the results of the regressions, \textit{Section \ref{Robustness}} will check the robustness of the results and \textit{Section \ref{Conclusion}} will provide a conclusion and possible extensions for next steps. 
 
 \section{Literature Review}
 \label{Literature}
-This section will be broke into two components. The first section will adress  theoretical models for asset purchasing and then we will introduce some of the mythology for  EGS factor in the asset pricing framework.\\
-
-
- \hl{add a section on the metholoogy for the 2 pass sort use} \cite{Kleibergen2013UnexplainedFA} and \cite{Fama1973RiskRA} \\
-The modern foundation of asset pricing began with the capital asset pricing model based on Sharp's 1964's work which used a regression analysis to relate market returns to individual security returns \cite{Sharpe1964CAPITALAP}. The CAPM model was later iterated on by Fama french in 1993 with the 3 factor, which considered several other terms to predict stock returns. Fama and French added size and book to market terms to the CAPM model. They found that these three coefficients created a more explanatory model which demonstrated the relationship that value companies(low book to market) and small companies experience larger excess returns \cite{Fama1992TheCO}. Fama and French again innovated on the three-factor model in 2015 by adding two factors to the regression. In this model, Fama and French consider Investment and profitability while holding the other regression stable factors. The five-factor model analysis found that the addition of the investment and profitability factor made the value factor redundant \cite{Fama2013AFA}. The five-factor framework analysis has been recreated on international exchanges to test the effects on foreign markets. In recreation by Fama French and another study by Zhong and Li, the general relationships demonstrated in the five-factor model are also applicable in China, Japan, and Australian markets \cite{Fama2015InternationalTO, LIN2017141, Chiah2016A}. However, when the Fama French regression was applied to the Australian equity market, the authors did not find the significance of the value factor to subside like was visible in the 2015 paper \cite{Chiah2016A}.  In addition to expanding the five-factor analysis geographically, some scholars have expanded the five-factor model by adding additional terms to assess momentum effects.  In a paper published by  Dirkx and  Peter, the authors expanded the five-factor model by applying the Fama French framework to the German market while also adding a sixth term to assess the effect of risk premium with the CDAX constituents' momentum. Another study by Gregory and Stead used the sixth factor as an ESG factor to analyze if the ESG effect played a significant role in determining risk premia. This paper found that  "the risk premium of the sustainability factor is positive and significant\cite{Gregory2020TheGP}."
-
-In addition to Gregory and Stead's paper, several other authors have used the Fama French model to address the question concerning ESG and risk premia. To set up an ESG Fama French model, many academic journal articles use an index as a positive ESG portfolio and another index as a negative portfolio to create the ESG factor. In Gregory and Stead's paper, the author uses the S\&P ESG index as the high ESG index and the S\&P petroleum index as the low index to create a factor by subtracting the returns from the high ESG portfolio from the low ESG portfolio \cite{Gregory2020TheGP}. In Dorfleitner et al.'s paper, the authors collect Thomas Reuter's controversies and combined ESG score for 2500 companies. With the ranked ESG score data, the author then creates two portfolios by separating the top decile score and the bottom deciles scores, which act as the ESG and contra ESG portfolios. Similar to Gregory et al. paper, the author subtract the top 10\% from the bottom 10\% to create the ESG factor \cite{Dorfleitner2020ESGCA}.   
+\input{Paper/lit_review}
 
 
 \section{Data}
 \label{Data}
-The data used for this paper was sourced from three datasets. The daily performance of the individual stock prices was collected from CRSP's primarily daily stock prices. Data on the ESG portfolio and the contra ESG portfolio were extracted from Compustat as the daily returns for the MSCI World ESG Focus Index and S\&P petroleum index, respectively. Finally, daily Fama French factors for SMB, CMA, HML, and RMW were sourced from the Kenneth R. French - Data Library.  
-
-
-
-An ESG factor, denoted as EMP (Esg Minus Petroleum), was created by taking the daily returns from the MSCI World ESG Focus Index and subtracting the daily returns for the the  S\&P petroleum index. Petroleum companies act as a stand-in for a contra ESG portfolio in a similar way to isolate the specific risk component just to ESG similar to how Fama frech create their factors. The  petroleum index was chosen as non renewable energy industry is a exposed to a number of environmental risk factors that are considered substantially in an ESG analysis. In addition, the use of a petroleum index has been used in other academic work as a stand in for a contra ESG portfolio \cite{Frynas2005TheFD}. Although the Petroleum industry has major environmental, risks there is less social orientated risks in petrolium. One solution to this provlem would be to use the index \$VICE which tracks alcohol, drug, gaming and betting industry  as the  contra ESG portfolio. However \$Vice has only traded for two years, as such the data is far less robust. Instead, to check for robustness of the ESG factor and to exposure the contra portfolio to both strong social and environmental risk factors the analysis explained in the methodology will be repeated using the \& Mining Select Industry Index as the contra ESG portfolio for the EMP factor in Section \ref{Robustness}. It has been also well documented that the mining industry also struggles to adapt to ESG factors due to the nature of the industry as has suffered from many human right violations which would significantly effects its social risk  \cite{Kapelus2002MiningCS}.
-
-\begin{equation}
-    \label{making_EMP}
-    EMP = R_{\text{World ESG Focus Index}}- R_{\text{S\&P petroleum index}}
-\end{equation}
-
-For this analysis, daily returns data was collected between June 2011 and March 2021. The started was determined by the initiation of the MSCI ESG index. To collect daily individual stock return information CRSP data parsed from a larger data set and then collapsed on month by summing each individual days returns to create monthly returns. Similarly Fama French factors were collected on a daily basis and collapsed by month summing the daily returns for montly figures. Finally the EMP factor was also  constructed summing the daily returns for each much. All three of the datasets were merged using the date and month as the matching component. The culmination of merging and collapsing resulted in  830,891 observations for monthly returns over  12,194 unique stocks. The merged and cleaned dataset had an average of 68 months of data of individual security data for each unique security. Below in table 1 are the summary statistics for the raw data.
-
-
- 
+\input{Paper/data}
 
  
 \section{Methodology}
 \label{Methodology}
-As discussed in the literature review, there are numerous models for assessing asset pricing and abnormal returns. In this paper, I will be using an extension of Fama French's 2015 paper ``A five-factor asset pricing model". This analysis method is built on the Fama French three factor model and relies on the two-pass sort with an assigned series of beta decile and size decile-based portfolios. Breaking the portfolios into these distinct groups allows for further analysis of the effect across these two factors to assess relational interdependency. 
-
-For this analysis, I sort each security into decile groups for beta and size (based on market cap). As firms' size and volatility are not constant functions, each firm is assigned a decile for each month depending on the most recent decile split.  Each security will be assigned a decile for beta and size according to the CRSP /NYSE American beta decile for beta and the CRSP Nasdaq Market Capitalization portfolio for size. After sorting each of the securities by beta and size decile, 300,264 of the original 830,889 data points had matches for both beta and size portfolios. To estimate the factor sensitivities base on the described decile groups, I ran the regression in equation \eqref{six_factor_basic_reg} on the cleaned data set. 
-
-
-
-
-\begin{equation}
-\begin{split}
-    R_{i,t}^e = a_i+b_i(R_{M,t}-R_{fr,t})+s_iSMB_t+ h_iHML_t+  r_iRMW_t+c_iCMA_t+e_iEMP_t +\epsilon_{i,t}
-    \end{split}
-    \label{six_factor_basic_reg}
-\end{equation}
-
-\begin{center}
-Where:\\
-    $R_{i,t}^e = R_{it}-R_{rf,t}$
-\end{center}
-
-Next, I used the data from equation \eqref{six_factor_basic_reg} to run the second regression in the two-pass sort. The second pass of the two-pass sort is described in the equation  \eqref{second_pass} and is used to obtain the risk premia. To consolidate the risk premium across time, a simple average as described in equation \eqref{summing_lamda} is used to collapse the risk premia for each of the given factors. 
-
-\begin{equation}
-    E[R^e]= b\lambda_1+s\lambda_2 +h\lambda_3 +r\lambda_4 +c \lambda_4 + e\lambda_5
-    \label{second_pass}
-\end{equation}
-
+\input{Paper/Methodology}
 
 \section{Results}
 \label{Results}
-Table 3 represents a matrix of values for the first pass in the Fama French two-pass sort, described in equation \eqref{six_factor_basic_reg}. The column axis is the distinct size deciles where 1 is the smallest market cap companies, and 10 is the decline with the largest market cap companies. The row axis includes estimated coefficients for the intercept, five Fama French factors, and the EMP factor. $HML_{t}$ is the difference between the returns on diversified portfolios of the high and low book to market stocks.  $SMB_{t}$ is the return on a diversified portfolio of small stocks minus the return on a diversified portfolio of big stocks. $RMW_t$ is the difference between the returns on diversified portfolios of stocks with robust and weak profitability. $CMA_{t}$ is the difference between the returns on diversified portfolios of the stocks of low and high investment firms. $EMP_t$ is the difference between MSCI World ESG Focus Index returns and the S\&P petroleum index. Finally, the intercept is the excess returns for the given decile. The results in this table demonstrate that for HML, CMA, and EMP factors, there is a size-based relationship wherein the larger the size decile, the smaller the sensitivity effect is on the factor. In addition, the EMP factor also exhibits a consistent negative relationship between the EGS factor and returns. This relationship indicates that investors are actually paying a premium to invest in ESG companies over the contra ESG counterparts. Table 4 complements table 3 with a breakdown of significance for each coefficient in table 3. The low p-values in the EMP factor indicate that the coefficients on all but the largest and smallest size deciles are significant at the 5\% level. It is important to note that all of the other Fama French factors are also less significant In the largest and small portfolios. This trend might indicate that the data might have pointed at far ends which do not behave like the other deciles.  Table 6 demonstrates the risk premia for each of the factors using the second step in the two-pass sort. All of the Fama French factors in the size decile two-pass sort have positive risk premia. The EMP factor large than all of the other factors, with a coefficient of approximately  16.8\%
-
-
-
-
-Table 5 details the relationship outlined in equation \eqref{six_factor_basic_reg} in the methodology where the column axis is the beta decile. In this table,  the beta decile 1 comprises the companies with the lowest beta. Similarly, beta decile 10 is the portfolio of companies with the largest beta values.  Similar to the size decile, the EMP factor exhibits a negative relation with regard to its sensitivity. However, unlike the size decile analysis, there does not appear to be a significant relationship between the beta decile and the factor's sensitivity. Although the most significant impact is on the lowest decile, the least impact is experienced on the 6th decile portfolio, and the largest decile is close to the middle in terms of sensitivity. Similar to the size decile analysis, the EMP coefficients are all very significant, with every decile having significance at the 5\% level. When considering the second phase of the two-pass sort, the similarities to the size decile continue wherein each of the Fama French five factors exhibit positive risk premia, and the EMP also exhibits a positive relationship. The EMP factor again has a high coefficient with approximately 15.8\%. 
-
+\input{Paper/Results}
 
 \section{Robustness Checks}
-when doing the SIC porlfios did not have data for SIC starting with 5 b/c they were all BB companies 
- %as dicussed in section \ref{Data} [talk about using mining instead of petrolum ]
+\input{Paper/robustness}
 \label{Robustness}
 
 \section{Conclusion}
@@ -96,34 +41,63 @@ when doing the SIC porlfios did not have data for SIC starting with 5 b/c they w
 \newgeometry{margin=.15in}
 
 \section{Appendix}
+%take these when needed
+\begin{center}
+    \paperspacingnarrow
+    \input{Code/data/desc1}\\
+    \textbf{Table 1: EXPLAIN THE TABLE!!!}
+    \paperspacingwide
+\end{center}
 
- \begin{center}
-     \textbf{Table 1}\\
- \input{Code/data/desc1}
+\begin{center}
+    \paperspacingnarrow 
+    \input{Code/data/size_summary_stat_size}\\
+    \textbf{Table 2:} This table shows the mean results by decile before any regressions\\
+    \paperspacingwide
  \end{center}
-\input{Code/data/size_summary_stat_size}\\
-\textbf{Table 2:} This table shows the mean results by decile before any regressions\\
+\vspace{1cm}
+
+\begin{center}
+    \paperspacingnarrow
+    \input{Code/data/beta_output_inital}\\
+    \textbf{Table 3:} Beta decile by estimated coefficients for the  five fama french factors and EMP factor\\
+    \paperspacingwide
+\end{center}
+
+
 \vspace{1cm}
 
 
 \begin{center}
-\input{Code/data/beta_output_inital}\\
-\textbf{Table 3:} Beta decile by estimated coefficients for the  five fama french factors and EMP factor\\
-\end{center}
-\vspace{1cm}
-\begin{center}
-\input{Code/data/size_output_inital}\\
-\textbf{Table 4:} Size decile by estimated coefficients for the  five fama french factors and EMP factor\\
+    \paperspacingnarrow
+    \input{Code/data/size_output_inital}\\
+    \textbf{Table 4:} Size decile by estimated coefficients for the  five fama french factors and EMP factor\\
+    \paperspacingwide
 \end{center}
 
+
 \begin{center}
+    \paperspacingnarrow
     \input{Code/data/FF_pass_2}\\
     \textbf{Table 4:} second pass results for the size and beta decile portfolios\\
+    \paperspacingwide
 \end{center}
 
+
 \begin{center}
+    \paperspacingnarrow
     \input{Code/data/FF_pass_2_no_ESG}\\
     \textbf{Table 5:} second pass results for the size and beta decile portfolios without ESG factor\\
+    \paperspacingwide
+\end{center}
+
+
+\begin{center}
+    \paperspacingnarrow
+    \input{Code/data/Industry_FF_pass_2}\\
+    \textbf{Table 6:} second pass results for the size and beta decile portfolios without ESG factor\\
+    \paperspacingwide
+
 \end{center}
 
 \clearpage
