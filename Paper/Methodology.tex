@@ -1,7 +1,7 @@
-As discussed in the literature review, there are numerous models for assessing asset pricing and abnormal returns. In this paper, I will be using an extension of Fama French's 2015 paper ``A five-factor asset pricing model". This analysis method is built on the Fama French three factor model and relies on the two-pass sort with an assigned series of beta decile and size decile-based portfolios. Breaking the portfolios into these distinct groups allows for further analysis of the effect across these two factors to assess relational interdependency. 
+As discussed in the literature review, there are numerous models for assessing asset pricing and abnormal returns. In this paper, I will be using an extension of Fama French's 2015 paper ``A five-factor asset pricing model". This analysis method is built on the Fama French three-factor model and relies on the two-pass sort. Like the section \ref{Data} on data, this section is broken up into multiple parts. First, I will explain the methodology for assessing the sensitivity and risk premium for the ESG factor created from the MSCI ESG index minus the petroleum index. Next, I will discuss the methodology for MSCI ESG rating ESG factors. I will conclude with a brief description of the newey west errors and the setup of assessing statistical significance. 
 
-For this analysis, I sort each security into decile groups for beta and size (based on market cap). As firms' size and volatility are not constant functions, each firm is assigned a decile for each month depending on the most recent decile split.  Each security will be assigned a decile for beta and size according to the CRSP /NYSE American beta decile for beta and the CRSP Nasdaq Market Capitalization portfolio for size. After sorting each of the securities by beta and size decile, 300,264 of the original 830,889 data points had matches for both beta and size portfolios. To estimate the factor sensitivities base on the described decile groups, I ran the regression in equation \eqref{six_factor_basic_reg} on the cleaned data set. 
 
+For the first part of this study, I sort each security into decile groups based on beta and size. The size and beta deciles ratings are provided by CRSP and are merged on the individual firm level for each month of data. Next, I conducted the first pass for the two-pass sort by running the regression of expected returns on market risk premia the four Fama French factors and the EMP factor as described in equation \eqref{six_factor_basic_reg}. This regression was run twice: once on the beta-ranked portfolios and again on the size-ranked portfolios.
 
 
 
@@ -17,11 +17,14 @@ Where:\\
     $R_{i,t}^e = R_{it}-R_{rf,t}$
 \end{center}
 
-Next, I used the data from equation \eqref{six_factor_basic_reg} to run the second regression in the two-pass sort. The second pass of the two-pass sort is described in the equation  \eqref{second_pass} and is used to obtain the risk premia. To consolidate the risk premium across time, a simple average as described in equation \eqref{summing_lamda} is used to collapse the risk premia for each of the given factors. 
+Next, I used the data from equation \eqref{six_factor_basic_reg} to run the second regression in the two-pass sort. The second pass of the two-pass sort is described in the equation  \eqref{second_pass}. The second pass describes the risk premia for each of the six factors in the mode. This second pass was performed for both beta and size-based portfolios.
 
 \begin{equation}
     E[R^e]= b\lambda_1+s\lambda_2 +h\lambda_3 +r\lambda_4 +c \lambda_4 + e\lambda_5
     \label{second_pass}
 \end{equation}\\
 
-\hl{discuss newly west error }
+The second set of regressions is focused on establishing a link between MSCI ESG ratings and ESG risk factor sensitivity. Similar to the first set of regressions, I use a two-pass sort methodology using both size and beta ranked portfolios. To create the ESG factor for this set of analyses, I used the all industry ESG factor described in Section \ref{Data}. The process of implementing the regression follows the same basic form as the one for the MSCI ESG index and petroleum index ESG factor by first running a pass on the portfolio by size and following that with a cross-sectional analysis to quantify the risk premium. 
+
+Finally, in determining the statistical significance of each of the coefficients, it is important to discuss the newly west error. The newly west error is a replacement for standard error in a traditional OLS regression. the advantage of the newly west is an ability to account for serial correlation within the model 
+
