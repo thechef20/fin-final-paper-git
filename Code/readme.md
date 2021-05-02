@@ -37,8 +37,8 @@ The main methology!
 
 --> this will track the time effect of the EMP feeds in from the end of dealing with pre preranking
 
-(1) SIC_universe.do
---> feeds in from  "Industry_ESG_analysis.do" half way through. this will explore to see if high minus low here has any mesurable effect 
+(1) SIC_universe_ESG_analysis.do
+--> feeds in from  "Industry_ESG_analysis.do" half way through. this will explore to see if high minus low here has any mesurable effect
 
 
 

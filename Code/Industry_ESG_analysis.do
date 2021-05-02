@@ -165,6 +165,8 @@ xtset indexy_time_var size_ports
 asreg expected_return_stock market_minus_rf  hml smb rmw cma emp, fmb newey(1) first save(parody)
 outreg2 using Industry_FF_pass_2.tex, append ctitle(SIC 4) tex(fragment)
 
+
+
 ****** size based porfolios 6
 use SIC_size_porfolios, clear
 

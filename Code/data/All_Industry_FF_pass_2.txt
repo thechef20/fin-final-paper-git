@@ -1,23 +1,23 @@
-	(1)
-VARIABLES	SIC 1
-	
-market_minus_rf	0.986***
-	(0.0433)
-hml	0.0915
-	(0.0594)
-smb	0.458***
-	(0.0714)
-rmw	0.00656
-	(0.0284)
-cma	0.185**
-	(0.0600)
-emp	0.0446***
-	(0.0115)
-Constant	-0.000814
-	(0.00203)
-	
-Observations	1,150
-Number of groups	10
-R-squared	0.853
-Standard errors in parentheses	
-*** p<0.01, ** p<0.05, * p<0.1	
+	(1)	(2)
+VARIABLES	All SIC	All SIC
+		
+market_minus_rf	0.987***	1.010***
+	(0.0437)	(0.163)
+hml	0.0822	0.130
+	(0.0611)	(0.0760)
+smb	0.479***	0.461***
+	(0.0723)	(0.111)
+rmw	-0.00453	0.000846
+	(0.0273)	(0.0871)
+cma	0.207***	0.155**
+	(0.0610)	(0.0621)
+emp	-0.00950**	0.0157
+	(0.00385)	(0.0116)
+Constant	-0.000777	-0.00137
+	(0.00205)	(0.000925)
+		
+Observations	1,150	1,150
+R-squared	0.850	0.837
+Number of groups	10	10
+Standard errors in parentheses		
+*** p<0.01, ** p<0.05, * p<0.1		
