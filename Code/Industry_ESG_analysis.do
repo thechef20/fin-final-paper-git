@@ -107,6 +107,8 @@ sort cal_year mmonth SICfirstNumber size_ports
 egen unique_tmie_SIC_size = group(cal_year mmonth SICfirstNumber size_ports)
 
 collapse (mean) expected_return_stock hml smb rmw cma industry_ESG_factor market_minus_rf (lastnm)indexy_time_var mmonth cal_year SICfirstNumber size_ports, by(unique_tmie_SIC_size)
+****** Altering the year on here 
+*drop if cal_year<2017
 save SIC_size_porfolios.dta , replace
 
 

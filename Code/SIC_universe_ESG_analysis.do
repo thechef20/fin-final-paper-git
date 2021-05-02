@@ -32,11 +32,13 @@ gen high_ESG = retx if decile_screen==1
 egen collapse_id = group(SICfirstNumber cal_year mmonth  )
 collapse (mean) high_ESG low_ESG (lastnm) kypermno cal_year mmonth SICfirstNumber, by(collapse_id)
 sort SICfirstNumber  cal_year mmonth
-gen industry_ESG_factor = low_ESG-high_ESG
+gen industry_ESG_factor = high_ESG-low_ESG
 drop low_ESG high_ESG collapse_id kypermno
 egen indexy_time_var = group(cal_year mmonth)
 * <-- from here down copy past 
 save all_industry_ESG_factor.dta, replace 
+
+*** Creating size porlfio all data 
 
 
 use return_data_for_testing_entire_SIC_universe,clear
@@ -49,7 +51,21 @@ egen unique_tmie_SIC_size = group(cal_year mmonth size_ports)
 collapse (mean) expected_return_stock hml smb rmw cma industry_ESG_factor market_minus_rf (lastnm)indexy_time_var mmonth cal_year SICfirstNumber size_ports, by(unique_tmie_SIC_size)
 save all_industry_SIC_size_porfolios.dta , replace
 
-****** size based porfolios 1
+**** Creating beta porflio all data
+
+
+use return_data_for_testing_entire_SIC_universe,clear
+merge m:m indexy_time_var using all_industry_ESG_factor.dta
+drop _merge
+drop esg_minus_rf
+sort cal_year mmonth SICfirstNumber beta_ports
+egen unique_tmie_SIC_size = group(cal_year mmonth beta_ports)
+
+collapse (mean) expected_return_stock hml smb rmw cma industry_ESG_factor market_minus_rf (lastnm)indexy_time_var mmonth cal_year SICfirstNumber beta_ports, by(unique_tmie_SIC_size)
+save all_industry_SIC_beta_porfolios.dta , replace
+
+
+****** size based porfolios 2 pass regression 
 use all_industry_SIC_size_porfolios, clear
 
 
@@ -57,5 +73,35 @@ gen emp = industry_ESG_factor
 drop  industry_ESG_factor
 xtset indexy_time_var size_ports 
 asreg expected_return_stock market_minus_rf  hml smb rmw cma emp, fmb newey(1) first save(parody_3)
-outreg2 using All_Industry_FF_pass_2.tex, replace ctitle(All SIC ) tex(fragment)
+outreg2 using All_Industry_FF_pass_2.tex, replace ctitle(Size portfolio) tex(fragment)
 
+****** beta based porfolios 2 pass regression 
+use all_industry_SIC_beta_porfolios, clear
+
+
+gen emp = industry_ESG_factor
+drop  industry_ESG_factor
+xtset indexy_time_var beta_ports 
+asreg expected_return_stock market_minus_rf  hml smb rmw cma emp, fmb newey(1) first save(parody_3)
+outreg2 using All_Industry_FF_pass_2.tex, append ctitle(Beta Portfolio) tex(fragment)
+
+
+****** size based porfolios 2 pass regression 2019 and beyond
+use all_industry_SIC_size_porfolios, clear
+drop if cal_year<2019
+
+gen emp = industry_ESG_factor
+drop  industry_ESG_factor
+xtset indexy_time_var size_ports 
+asreg expected_return_stock market_minus_rf  hml smb rmw cma emp, fmb newey(1) first save(parody_3)
+outreg2 using All_Industry_FF_pass_2_past_2018.tex, replace ctitle(Size portfolio) tex(fragment)
+
+****** beta based porfolios 2 pass regression  2019 and beyond 
+use all_industry_SIC_beta_porfolios, clear
+drop if cal_year<2019
+
+gen emp = industry_ESG_factor
+drop  industry_ESG_factor
+xtset indexy_time_var beta_ports 
+asreg expected_return_stock market_minus_rf  hml smb rmw cma emp, fmb newey(1) first save(parody_3)
+outreg2 using All_Industry_FF_pass_2_past_2018.tex, append ctitle(Beta Portfolio) tex(fragment)
