@@ -88,7 +88,8 @@ outreg2 using All_Industry_FF_pass_2.tex, append ctitle(Beta Portfolio) tex(frag
 
 ****** size based porfolios 2 pass regression 2019 and beyond
 use all_industry_SIC_size_porfolios, clear
-drop if cal_year<2019
+drop if cal_year<2018
+drop if cal_year>2020
 
 gen emp = industry_ESG_factor
 drop  industry_ESG_factor
@@ -98,7 +99,8 @@ outreg2 using All_Industry_FF_pass_2_past_2018.tex, replace ctitle(Size portfoli
 
 ****** beta based porfolios 2 pass regression  2019 and beyond 
 use all_industry_SIC_beta_porfolios, clear
-drop if cal_year<2019
+drop if cal_year<2018
+drop if cal_year>2020
 
 gen emp = industry_ESG_factor
 drop  industry_ESG_factor

@@ -37,10 +37,20 @@ foreach v in `size_list'{
 	gen `v' = LLL_`v'
 	drop LLL_`v'
 }
+
+label variable _b_hml "HML"
+label variable _b_market_minus_rf "Market"
+label variable _b_smb "SMB"
+label variable _b_rmw "RMW"
+label variable _b_cma "CMA"
+label variable _b_emp "EMP"
+label variable _R2 "R^2"
+label variable portfolio_number "portfolio num"
 eststo clear
+local labelsl = "HML Market SMB RMW CMA EMP portfolio"
 ds
-estpost tabstat `r(varlist)', by(portfolio_number)
-esttab  using size_output_inital.tex, cells("`size_list'") replace noobs nodepvar nomtitle
+estpost tabstat `r(varlist)', by(portfolio_number) nototal
+esttab  using size_output_inital.tex, collabels("Market ""HML" "SMB" "RMW" "CMA" "EMP" "R2" "portfolio num")   nonumbers  noobs  cells("`beta_list'") replace
 *esttab using desc1.tex, cells("mean sd min max") replace  nodepvar width(10pt)
 
 
@@ -78,7 +88,22 @@ foreach v in `beta_list'{
 	gen `v' = LLL_`v'
 	drop LLL_`v'
 }
+label variable _b_hml "HML"
+label variable _b_market_minus_rf "Market"
+label variable _b_smb "SMB"
+label variable _b_rmw "RMW"
+label variable _b_cma "CMA"
+label variable _b_emp "EMP"
+label variable _R2 "R^2"
+label variable portfolio_number "portfolio num"
+
 eststo clear
 ds
-estpost tabstat `r(varlist)', by(portfolio_number)
-esttab  using beta_output_inital.tex, cells("`beta_list'") replace noobs nodepvar nomtitle
+local labelsl = "HML Market SMB RMW CMA EMP portfolio"
+estpost tabstat `r(varlist)', by(portfolio_number) nototal 
+esttab  using beta_output_inital.tex,  collabels("Market ""HML" "SMB" "RMW" "CMA" "EMP" "R2" "portfolio num")   nonumbers  noobs nomti  cells("`beta_list'")  replace
+*unstack
+*esttab  using beta_output_inital.tex,  cells("`beta_list'") replace   mtitle("Market ""HML" "SMB" "RMW" "CMA" "EMP" "R2" "portfolio num")  unstack nonumbers  collabels(none) eqlabels(none)    noobs 
+*nomtitle nodepvar
+*mtitle("HML" "Market" "SMB" "RMW" "CMA" "EMP" "portfolio num")
+*mtitle("Market" "HML" "SMB" "RMW" "CMA" "EMP" "R2" "portfolio num")
