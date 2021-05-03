@@ -109,6 +109,15 @@ egen unique_tmie_SIC_size = group(cal_year mmonth SICfirstNumber size_ports)
 collapse (mean) expected_return_stock hml smb rmw cma industry_ESG_factor market_minus_rf (lastnm)indexy_time_var mmonth cal_year SICfirstNumber size_ports, by(unique_tmie_SIC_size)
 ****** Altering the year on here 
 *drop if cal_year<2017
+*labeling variable 
+gen emp = industry_ESG_factor
+drop  industry_ESG_factor
+label variable hml "HML"
+label variable emp "ESG"
+label variable smb "SMB"
+label variable cma "CMA"
+label variable market_minus_rf "Market"
+label variable rmw "RMW"
 save SIC_size_porfolios.dta , replace
 
 
@@ -123,11 +132,9 @@ use SIC_size_porfolios, clear
 
 drop if SICfirstNumber !=1
 
-gen emp = industry_ESG_factor
-drop  industry_ESG_factor
 xtset indexy_time_var size_ports 
 asreg expected_return_stock market_minus_rf  hml smb rmw cma emp, fmb newey(1) first save(parody)
-outreg2 using Industry_FF_pass_2.tex, replace ctitle(SIC 1) tex(fragment)
+outreg2 using Industry_FF_pass_2.tex, replace ctitle(SIC 1) tex(fragment) label
 ****** size based porfolios 2
 use SIC_size_porfolios, clear
 
@@ -135,11 +142,10 @@ use SIC_size_porfolios, clear
 
 drop if SICfirstNumber !=2
 
-gen emp = industry_ESG_factor
-drop  industry_ESG_factor
+
 xtset indexy_time_var size_ports 
-asreg expected_return_stock market_minus_rf  hml smb rmw cma emp, fmb newey(1) first save(parody)
-outreg2 using Industry_FF_pass_2.tex, append ctitle(SIC 2) tex(fragment)
+asreg expected_return_stock market_minus_rf  hml smb rmw cma emp, fmb newey(1) first  save(parody)
+outreg2 using Industry_FF_pass_2.tex, append ctitle(SIC 2) tex(fragment) label
 
 ****** size based porfolios 3
 use SIC_size_porfolios, clear
@@ -148,11 +154,10 @@ use SIC_size_porfolios, clear
 
 drop if SICfirstNumber !=3
 
-gen emp = industry_ESG_factor
-drop  industry_ESG_factor
+
 xtset indexy_time_var size_ports 
 asreg expected_return_stock market_minus_rf  hml smb rmw cma emp, fmb newey(1) first save(parody)
-outreg2 using Industry_FF_pass_2.tex, append ctitle(SIC 3) tex(fragment)
+outreg2 using Industry_FF_pass_2.tex, append ctitle(SIC 3) tex(fragment) label
 
 ****** size based porfolios 4
 use SIC_size_porfolios, clear
@@ -161,11 +166,10 @@ use SIC_size_porfolios, clear
 
 drop if SICfirstNumber !=4
 
-gen emp = industry_ESG_factor
-drop  industry_ESG_factor
+
 xtset indexy_time_var size_ports 
 asreg expected_return_stock market_minus_rf  hml smb rmw cma emp, fmb newey(1) first save(parody)
-outreg2 using Industry_FF_pass_2.tex, append ctitle(SIC 4) tex(fragment)
+outreg2 using Industry_FF_pass_2.tex, append ctitle(SIC 4) tex(fragment) label
 
 
 
@@ -176,11 +180,10 @@ use SIC_size_porfolios, clear
 
 drop if SICfirstNumber !=6
 
-gen emp = industry_ESG_factor
-drop  industry_ESG_factor
+
 xtset indexy_time_var size_ports 
 asreg expected_return_stock market_minus_rf  hml smb rmw cma emp, fmb newey(1) first save(parody)
-outreg2 using Industry_FF_pass_2.tex, append ctitle(SIC 6) tex(fragment)
+outreg2 using Industry_FF_pass_2.tex, append ctitle(SIC 6) tex(fragment) label
 
 
 ****** size based porfolios 7
@@ -190,11 +193,10 @@ use SIC_size_porfolios, clear
 
 drop if SICfirstNumber !=7
 
-gen emp = industry_ESG_factor
-drop  industry_ESG_factor
+
 xtset indexy_time_var size_ports 
 asreg expected_return_stock market_minus_rf  hml smb rmw cma emp, fmb newey(1) first save(parody)
-outreg2 using Industry_FF_pass_2.tex, append ctitle(SIC 7) tex(fragment)
+outreg2 using Industry_FF_pass_2.tex, append ctitle(SIC 7) tex(fragment) label
 
 ****** size based porfolios 8
 use SIC_size_porfolios, clear
@@ -203,9 +205,8 @@ use SIC_size_porfolios, clear
 
 drop if SICfirstNumber !=8
 
-gen emp = industry_ESG_factor
-drop  industry_ESG_factor
+
 xtset indexy_time_var size_ports 
 asreg expected_return_stock market_minus_rf  hml smb rmw cma emp, fmb newey(1) first save(parody)
-outreg2 using Industry_FF_pass_2.tex, append ctitle(SIC 8) tex(fragment)
+outreg2 using Industry_FF_pass_2.tex, append ctitle(SIC 8) tex(fragment) label
 

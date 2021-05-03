@@ -22,12 +22,20 @@ drop  esg_minus_rf
 gen excess_returns  = expected_return_stock
 drop expected_return_stock
 drop mmonth
+label variable hml "HML"
+label variable EMP "EMP"
+label variable smb "SMB"
+label variable cma "CMA"
+label variable market_minus_rf "Market"
+label variable rmw "RMW"
+label variable excess_returns "Excess Returns" 
+label variable tcap "Market Cap" 
 *eststo: quietly
 eststo clear
-eststo: estpost summarize excess_returns market_minus_rf hml smb rmw cma EMP tcap
+eststo: estpost summarize excess_returns market_minus_rf hml smb rmw cma EMP tcap,
 *est store a 
 
-esttab using desc1.tex, cells("mean sd min max") replace  nodepvar
+esttab using desc1.tex, cells("mean sd min max") nonumbers label nomti nodepvar replace   
 
 
 *import data on the equle weight portoflios
