@@ -1,23 +1,23 @@
 		(1)	(2)
 VARIABLES	LABELS	Size portfolio	Beta Portfolio
 			
-market_minus_rf	Market	1.022***	1.035***
-		(0.0368)	(0.149)
-hml	HML	0.0240	0.0621
-		(0.0610)	(0.0388)
-smb	SMB	0.651***	0.638***
-		(0.0893)	(0.187)
-rmw	RMW	-0.00732	0.0187
-		(0.101)	(0.0388)
-cma	CMA	0.367***	0.347**
-		(0.0828)	(0.133)
-emp	ESG	-0.0276	0.00696
-		(0.0166)	(0.0271)
-Constant	Constant	0.000597	-0.000721
-		(0.00289)	(0.00132)
+market_minus_rf	Market	1.032***	1.026***
+		(0.0390)	(0.155)
+hml	HML	0.0205	0.0668*
+		(0.0592)	(0.0334)
+smb	SMB	0.665***	0.644***
+		(0.0939)	(0.166)
+rmw	RMW	-0.0186	0.0368
+		(0.111)	(0.0427)
+cma	CMA	0.374***	0.325*
+		(0.0848)	(0.144)
+emp	ESG	0.0132	-0.0131
+		(0.0238)	(0.0142)
+Constant	Constant	0.000455	-0.000693
+		(0.00311)	(0.00157)
 			
 Observations		360	360
-R-squared		0.921	0.918
+R-squared		0.922	0.917
 Number of groups		10	10
 Standard errors in parentheses			
 *** p<0.01, ** p<0.05, * p<0.1			

@@ -15,7 +15,7 @@ import delimited size_porflios_and_returns.csv, clear
 gen emp = esg_minus_rf
 
 label variable hml "HML"
-label variable emp "ESG"
+label variable emp "EMP"
 label variable smb "SMB"
 label variable cma "CMA"
 label variable market_minus_rf "Market"
@@ -26,7 +26,7 @@ xtset indexy_time_var size_ports
 asreg expected_return_stock market_minus_rf  hml smb rmw cma emp, fmb newey(1) first save(first_function_for_size)
 
 **********need to add this to my LATEX doc
-outreg2 using FF_pass_2.tex, replace ctitle(Size Portfolios) tex(fragment) label
+outreg2 using FF_pass_2.tex, replace ctitle(Size Portfolio) tex(fragment) label
 
 
 *** Size Pass 1
@@ -70,7 +70,7 @@ import delimited beta_porflios_and_returns.csv, clear
 
 gen emp = esg_minus_rf
 label variable hml "HML"
-label variable emp "ESG"
+label variable emp "EMP"
 label variable smb "SMB"
 label variable cma "CMA"
 label variable market_minus_rf "Market"
@@ -78,7 +78,7 @@ label variable rmw "RMW"
 drop esg_minus_rf
 xtset indexy_time_var beta_ports 
 asreg expected_return_stock market_minus_rf  hml smb rmw cma emp, fmb newey(1) first save(first_function_for_beta)
-outreg2 using FF_pass_2.tex, append ctitle(Beta Portfolios) tex(fragment) label
+outreg2 using FF_pass_2.tex, append ctitle(Beta Portfolio) tex(fragment) label
 
 
 
