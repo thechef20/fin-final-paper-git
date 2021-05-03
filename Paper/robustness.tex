@@ -7,7 +7,7 @@ As discussed in section \ref{Results}, additional tests are required to ensure t
     \textbf{Table 6:} second pass results for the size and beta decile portfolios without ESG factor\\
     \paperspacingwide
 \end{center}
-Another robustness check that is essential to consider is the time-based effects on the model. Although we have demonstrated that the EMP factor is statistically significant and explains part of our model, it is essential to understand if this is ubiquitous across time in the sample or if the  ESG factor has shifted in risk premia over time. To address this robustness concern, I have repeated the two-pass sort with the size decile portfolio by adding a time-based dummy variable. Table 7 details the results from the regressions. In 2015 2016, 2018, and 2019 there is statistical significance for the EMP term and a positive association between EMP and excess returns. The ESG factor showed the most strength in 2019 as well as the greatest coefficient value. In 2019 a one-unit change in beta would result in a 25.9\% increase in excess returns. The coefficient values in 2017 appeared to hold a negative relationship as a one-unit change in ESG beta would have resulted in a reduction in excess returns by 10.5\%. Although in 2020, there was a positive relationship, the coefficient is not statistically significant. However, in 2020, the CMA factor, which has been statistically significant at the 1\% level for all other tests, also does not appear to be statistically significant. 2020 represents a bit of a deviation due to the larger market condition from the COVID-19 pandemic rather than the EMP factor's long-run behavior.
+Another robustness check that is essential to consider is the time-based effects on the model. Although we have demonstrated that the EMP factor is statistically significant and explains part of our model, it is essential to understand if this is ubiquitous across time in the sample or if the  ESG factor has shifted in risk premia over time. To address this robustness concern, I have repeated the two-pass sort with the size decile portfolio by adding a time-based dummy variable. Table 7 details the results from this regression. In 2015 2016, 2018, and 2019 there is statistical significance for the EMP term and a positive association between EMP and excess returns. The ESG factor showed the most strength in 2019 as well as the greatest coefficient value. In 2019 a one-unit change in beta would result in a 25.9\% increase in excess returns. The coefficient value of the EMP term in 2017  holds a negative relationship as a one-unit change in ESG beta resulted in a reduction in excess returns by 10.5\%. Although in 2020, there was a positive relationship, the coefficient is not statistically significant. However, in 2020, the CMA factor, which has been statistically significant at the 1\% level for all other tests, also does not appear to be statistically significant. 2020 represents a bit of a deviation due to the larger market condition from the COVID-19 pandemic rather than the EMP factor's long-run behavior.
 
 
 \begin{center}
@@ -16,27 +16,27 @@ Another robustness check that is essential to consider is the time-based effects
     \textbf{Table 7:} Shows the results for the second pass in a two pass sort. The two pass sort used size based deciles for the first pass. Columns (1)-(6) represent individual years of data. 
     \paperspacingwide
 \end{center}
- \textbf{MSCI data 2018-2020}\\
- \begin{center}
-    \paperspacingnarrow
-\input{Code/data/All_Industry_FF_pass_2_past_2018}\\
-\textbf{Table 8:} SIC top 10\% minus bottom 10\% 2018-2020
-    \paperspacingwide
-\end{center}
- \textbf{MSCI SIC level analysis}\\
+
  
-  \begin{center}
+ Moving on to the second set of analyses with a slightly different definition of the ESG factor.  As described in the mythology and the results, I created another definition for measuring the effect of ESG by subtracting the Best 10\% of frim from the bottom 10\% of firms as defined by MSCI ESG scores. As demonstrated in the results section, there was no measured statistical relationship between this factor and the excess returns. To further break down this relationship, I decomposed the excess returns on a first digit SIC level to assess if some industries are more sensitive to ESG factors than others. Some industries are likely to be inherently ESG unfriendly and might not have a substantial effect from an ESG factor. To create this analysis, I made a unique ESG factor for each of the SIC first digit industry codes by subtracting returns from the best 10\% of the firm's ESG score from the bottom 10\% of the firm's ESG scores. This process is also detailed in the data section. With the new ESG factor, I regressed a two-pass sort using size decile portfolios on each SIC industry to access abnormal returns. MSCI did not have data on firms that started with SIC codes 0 or  9. Additionally, the MSCI data for SIC code 5 was only BBB; as such, there was no delineation in ESG rating, and I was unable to create a high low ESG factor. 
+
+\begin{center}
     \paperspacingnarrow
     \input{Code/data/Industry_FF_pass_2}\\
-    \textbf{Table 6:} second pass results for the size and beta decile portfolios without ESG factor\\
+    \textbf{Table 8:} shows the reuslts for the second regression reuslts in a two pass sort. Columns (1)-(7) represent the first digit SIC code insudtries and their respective sensitivity to the fama french five factor as well as the ESG factor. factor\\
+    
     \paperspacingwide
 \end{center}
-
- WE ADJUSTED THE YEAR to 2019!!
- problems we can never solve for both of these indexes does not do a great job capturing small companies so size might be a bit of a probelm overall as the small companies do not have ther ESG scores baked in as MSCI does not have the resources to rank every company
  
- when doing the SIC porlfios did not have data for SIC starting with 5 b/c they were all BB companies 
-
-dicuss limitation of only one set of ESG factors for MSCI 
  
- we used the Size deciles on a go froward basis when analysis the data as the statistical relationship was more apparent 
+ Another concern for the MSCI ESG generated ESG factor is the timeframe of the data.stickness to the ESG scores as it takes time to implment changes 
+ \begin{center}
+    \paperspacingnarrow
+    \input{Code/data/All_Industry_FF_pass_2_past_2018}\\
+    \textbf{Table 8:} SIC top 10\% minus bottom 10\% 2018-2020
+    
+    \paperspacingwide
+\end{center}
+ 
+ 
+
