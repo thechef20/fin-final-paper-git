@@ -32,7 +32,7 @@ gen high_ESG = retx if decile_screen==1
 egen collapse_id = group(SICfirstNumber cal_year mmonth  )
 collapse (mean) high_ESG low_ESG (lastnm) kypermno cal_year mmonth SICfirstNumber, by(collapse_id)
 sort SICfirstNumber  cal_year mmonth
-gen industry_ESG_factor = high_ESG-low_ESG
+gen industry_ESG_factor = low_ESG-high_ESG
 drop low_ESG high_ESG collapse_id kypermno
 egen indexy_time_var = group(cal_year mmonth)
 * <-- from here down copy past 
