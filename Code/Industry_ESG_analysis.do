@@ -47,11 +47,11 @@ drop if Country != "US"
 *drop holder
 
 sort SICfirstNumber NumericESG
+save export_for_testing_entire_SIC_universe.dta, replace
 
 *I really don't like the decileing here!!
 *********** Possability it to make it 1 and 10 for certian scores 
 *  fasterxtile but slower!
-save export_for_testing_entire_SIC_universe.dta, replace
 egen  decile_screen = xtile(NumericESG), by(SICfirstNumber) nq(10)
 
 drop if decile_screen>1 & decile_screen<10
